@@ -10,4 +10,5 @@ import Foundation
 
 protocol RegisterDelegate {
     func signUpNewUser(email: String, username: String, password: String)
+    func getPhoto()
 }

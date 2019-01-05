@@ -7,20 +7,8 @@
 //
 
 import UIKit
-import Firebase
 
-class RegisterController: UIViewController, RegisterDelegate {
-    
-    func signUpNewUser(email: String, username: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if let err = error {
-                print("Failed to create user with error: \(err)")
-                return
-            }
-            
-            print("Successfully created user: \(user?.user.uid ?? "no user")")
-        }
-    }
+class RegisterController: UIViewController, RegisterDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
