@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RegisterController.swift
 //  InstagramClone
 //
 //  Created by Daniel Peach on 1/5/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RegisterController: UIViewController {
     
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -51,8 +51,15 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
+        
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
+    
+    
+    @objc func handleSignUp() {
+        print(12)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,4 +93,3 @@ class ViewController: UIViewController {
     }
     
 }
-
