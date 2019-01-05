@@ -14,6 +14,8 @@
 		6521829E21E1419800F0BB70 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521829D21E1419800F0BB70 /* RegisterView.swift */; };
 		652182A021E141A400F0BB70 /* RegisterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521829F21E141A400F0BB70 /* RegisterDelegate.swift */; };
 		652182A221E14C8E00F0BB70 /* UIColor+ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */; };
+		652182A421E1615F00F0BB70 /* RegisterController+ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652182A321E1615F00F0BB70 /* RegisterController+ImagePickerDelegate.swift */; };
+		652182A621E161E600F0BB70 /* RegisterController+RegisterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652182A521E161E600F0BB70 /* RegisterController+RegisterDelegate.swift */; };
 		65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */; };
 		65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */; };
 		65EC535821E1318B007D4BD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65EC535721E1318B007D4BD0 /* GoogleService-Info.plist */; };
@@ -32,6 +34,8 @@
 		6521829D21E1419800F0BB70 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		6521829F21E141A400F0BB70 /* RegisterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDelegate.swift; sourceTree = "<group>"; };
 		652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ThemeColors.swift"; sourceTree = "<group>"; };
+		652182A321E1615F00F0BB70 /* RegisterController+ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegisterController+ImagePickerDelegate.swift"; sourceTree = "<group>"; };
+		652182A521E161E600F0BB70 /* RegisterController+RegisterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegisterController+RegisterDelegate.swift"; sourceTree = "<group>"; };
 		65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvenienceInits.swift"; sourceTree = "<group>"; };
 		65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchoring.swift"; sourceTree = "<group>"; };
 		65EC535721E1318B007D4BD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 				6521829B21E1416600F0BB70 /* RegisterController.swift */,
 				6521829D21E1419800F0BB70 /* RegisterView.swift */,
 				6521829F21E141A400F0BB70 /* RegisterDelegate.swift */,
+				652182A321E1615F00F0BB70 /* RegisterController+ImagePickerDelegate.swift */,
+				652182A521E161E600F0BB70 /* RegisterController+RegisterDelegate.swift */,
 			);
 			path = RegistrationScreen;
 			sourceTree = "<group>";
@@ -239,6 +245,7 @@
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		651770B121E111520051F3E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -249,8 +256,10 @@
 				6521829E21E1419800F0BB70 /* RegisterView.swift in Sources */,
 				65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */,
 				65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */,
+				652182A621E161E600F0BB70 /* RegisterController+RegisterDelegate.swift in Sources */,
 				651770B921E111520051F3E1 /* AppDelegate.swift in Sources */,
 				652182A021E141A400F0BB70 /* RegisterDelegate.swift in Sources */,
+				652182A421E1615F00F0BB70 /* RegisterController+ImagePickerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
