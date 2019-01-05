@@ -13,6 +13,7 @@
 		6521829C21E1416600F0BB70 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521829B21E1416600F0BB70 /* RegisterController.swift */; };
 		6521829E21E1419800F0BB70 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521829D21E1419800F0BB70 /* RegisterView.swift */; };
 		652182A021E141A400F0BB70 /* RegisterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521829F21E141A400F0BB70 /* RegisterDelegate.swift */; };
+		652182A221E14C8E00F0BB70 /* UIColor+ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */; };
 		65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */; };
 		65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */; };
 		65EC535821E1318B007D4BD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65EC535721E1318B007D4BD0 /* GoogleService-Info.plist */; };
@@ -30,6 +31,7 @@
 		6521829B21E1416600F0BB70 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		6521829D21E1419800F0BB70 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		6521829F21E141A400F0BB70 /* RegisterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDelegate.swift; sourceTree = "<group>"; };
+		652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ThemeColors.swift"; sourceTree = "<group>"; };
 		65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvenienceInits.swift"; sourceTree = "<group>"; };
 		65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchoring.swift"; sourceTree = "<group>"; };
 		65EC535721E1318B007D4BD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */,
 				65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */,
+				652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				652182A221E14C8E00F0BB70 /* UIColor+ThemeColors.swift in Sources */,
 				6521829C21E1416600F0BB70 /* RegisterController.swift in Sources */,
 				6521829E21E1419800F0BB70 /* RegisterView.swift in Sources */,
 				65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */,

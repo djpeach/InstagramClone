@@ -33,6 +33,7 @@ class RegisterView: UIView {
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.borderStyle = .roundedRect
         tf.font = UIFont.systemFont(ofSize: 18)
+        tf.addTarget(self, action: #selector(textWasEdited), for: .editingChanged)
         return tf
     }()
     
@@ -42,6 +43,7 @@ class RegisterView: UIView {
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.borderStyle = .roundedRect
         tf.font = UIFont.systemFont(ofSize: 18)
+        tf.addTarget(self, action: #selector(textWasEdited), for: .editingChanged)
         return tf
     }()
     
@@ -52,6 +54,7 @@ class RegisterView: UIView {
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.borderStyle = .roundedRect
         tf.font = UIFont.systemFont(ofSize: 18)
+        tf.addTarget(self, action: #selector(textWasEdited), for: .editingChanged)
         return tf
     }()
     
@@ -63,12 +66,32 @@ class RegisterView: UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(signUpWasClicked), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
     
     @objc func signUpWasClicked() {
-        delegate?.signUpNewUser()
+        guard let email = emailTextField.text, email.count > 0 else { return }
+        guard let username = usernameTextField.text, username.count > 0 else { return }
+        guard let password = passwordTextField.text, password.count > 0 else { return }
+        delegate?.signUpNewUser(email: email, username: username, password: password)
+    }
+    
+    @objc func textWasEdited() {
+        let emailHasText = emailTextField.text?.count ?? 0 > 0
+        let usernameHasText = usernameTextField.text?.count ?? 0 > 0
+        let passwordHasText = passwordTextField.text?.count ?? 0 > 0
+        
+        let formIsFilled = emailHasText && usernameHasText && passwordHasText
+        
+        if formIsFilled {
+            signUpButton.isEnabled = true
+            signUpButton.backgroundColor = .tBlue
+        } else {
+            signUpButton.isEnabled = false
+            signUpButton.backgroundColor = .tLightBlue
+        }
     }
     
     fileprivate func buildView() {

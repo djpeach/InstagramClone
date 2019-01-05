@@ -9,5 +9,5 @@
 import Foundation
 
 protocol RegisterDelegate {
-    func signUpNewUser()
+    func signUpNewUser(email: String, username: String, password: String)
 }
