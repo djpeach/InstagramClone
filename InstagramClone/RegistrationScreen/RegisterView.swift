@@ -24,6 +24,8 @@ class RegisterView: UIView {
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(addPhotoWasClicked), for: .touchUpInside)
+//        button.clipsToBounds = true
         return button
     }()
     
@@ -94,6 +96,10 @@ class RegisterView: UIView {
         }
     }
     
+    @objc func addPhotoWasClicked() {
+        delegate?.getPhoto()
+    }
+    
     fileprivate func buildView() {
         self.backgroundColor = .white
         placeAddPhotoButton()
@@ -120,5 +126,13 @@ class RegisterView: UIView {
         stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: plusPhotoButton.safeBottomAnchor, rightAnchor: self.safeRightAnchor, bottomAnchor: nil, leftAnchor: self.safeLeftAnchor, topPadding: 20, rightPadding: 40, leftPadding: 40)
         stackView.setSize(widthAnchor: nil, heightAnchor: stackViewHeight)
         
+    }
+    
+    func updateAddPhotoButton(withImage newImage: UIImage) {
+        plusPhotoButton.setImage(newImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        plusPhotoButton.layer.borderColor = UIColor.black.cgColor
+        plusPhotoButton.layer.borderWidth = 3
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width/2
+        plusPhotoButton.layer.masksToBounds = true
     }
 }
