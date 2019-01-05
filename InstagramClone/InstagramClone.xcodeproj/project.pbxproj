@@ -12,6 +12,8 @@
 		651770BE21E111520051F3E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 651770BC21E111520051F3E1 /* Main.storyboard */; };
 		651770C021E111540051F3E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 651770BF21E111540051F3E1 /* Assets.xcassets */; };
 		651770C321E111540051F3E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 651770C121E111540051F3E1 /* LaunchScreen.storyboard */; };
+		65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */; };
+		65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		651770BF21E111540051F3E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		651770C221E111540051F3E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		651770C421E111540051F3E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvenienceInits.swift"; sourceTree = "<group>"; };
+		65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchoring.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		651770B721E111520051F3E1 /* InstagramClone */ = {
 			isa = PBXGroup;
 			children = (
+				65EC535221E1176D007D4BD0 /* Utils */,
 				651770B821E111520051F3E1 /* AppDelegate.swift */,
 				651770BA21E111520051F3E1 /* ViewController.swift */,
 				651770BC21E111520051F3E1 /* Main.storyboard */,
@@ -62,6 +67,15 @@
 				651770C421E111540051F3E1 /* Info.plist */,
 			);
 			path = InstagramClone;
+			sourceTree = "<group>";
+		};
+		65EC535221E1176D007D4BD0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */,
+				65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +150,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				651770BB21E111520051F3E1 /* ViewController.swift in Sources */,
+				65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */,
+				65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */,
 				651770B921E111520051F3E1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
