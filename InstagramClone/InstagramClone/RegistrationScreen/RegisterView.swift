@@ -10,6 +10,8 @@ import UIKit
 
 class RegisterView: UIView {
     
+    var delegate: RegisterDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildView()
@@ -56,17 +58,17 @@ class RegisterView: UIView {
     let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        button.backgroundColor = UIColor(red: 149, green: 204, blue: 244)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signUpWasClicked), for: .touchUpInside)
         return button
     }()
     
     
-    @objc func handleSignUp() {
-        print(12)
+    @objc func signUpWasClicked() {
+        delegate?.signUpNewUser()
     }
     
     fileprivate func buildView() {

@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol RegisterDelegate {
+    func signUpNewUser()
+}

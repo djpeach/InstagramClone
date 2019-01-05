@@ -8,12 +8,17 @@
 
 import UIKit
 
-class RegisterController: UIViewController {
+class RegisterController: UIViewController, RegisterDelegate {
+    
+    func signUpNewUser() {
+        print("Signing up new user")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let registerView = RegisterView()
+        registerView.delegate = self
         self.view = registerView
     }
     
