@@ -25,7 +25,6 @@ class RegisterView: UIView {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(addPhotoWasClicked), for: .touchUpInside)
-//        button.clipsToBounds = true
         return button
     }()
     
@@ -77,7 +76,9 @@ class RegisterView: UIView {
         guard let email = emailTextField.text, email.count > 0 else { return }
         guard let username = usernameTextField.text, username.count > 0 else { return }
         guard let password = passwordTextField.text, password.count > 0 else { return }
-        delegate?.signUpNewUser(email: email, username: username, password: password)
+        guard let profilePicture = plusPhotoButton.imageView?.image else { return }
+        
+        delegate?.signUpNewUser(email: email, username: username, password: password, profilePicture: profilePicture)
     }
     
     @objc func textWasEdited() {

@@ -6,9 +6,9 @@
 //  Copyright © 2019 Daniel Peach. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol RegisterDelegate {
-    func signUpNewUser(email: String, username: String, password: String)
+    func signUpNewUser(email: String, username: String, password: String, profilePicture: UIImage)
     func getPhoto()
 }
