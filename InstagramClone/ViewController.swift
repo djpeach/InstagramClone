@@ -1,25 +1,15 @@
 //
-//  RegisterView.swift
+//  ViewController.swift
 //  InstagramClone
 //
-//  Created by Daniel Peach on 1/5/19.
+//  Created by Daniel Peach on 1/6/19.
 //  Copyright © 2019 Daniel Peach. All rights reserved.
 //
 
 import UIKit
+import Firebase
 
-class RegisterView: UIView {
-    
-    var delegate: RegisterDelegate?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        buildView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -78,7 +68,51 @@ class RegisterView: UIView {
         guard let password = passwordTextField.text, password.count > 0 else { return }
         guard let profilePicture = plusPhotoButton.imageView?.image else { return }
         
-        delegate?.signUpNewUser(email: email, username: username, password: password, profilePicture: profilePicture)
+        /* Create User */
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if let err = error {
+                print("Failed to create user with error: \(err)")
+                return
+            }
+            guard let user = user?.user else { return }
+            print("Successfully created user: \(user.uid)")
+            
+            guard let uploadData = profilePicture.jpegData(compressionQuality: 0.3) else { return }
+            
+            /* Store Image */
+            let fileName = NSUUID().uuidString
+            let storageRef = Storage.storage().reference().child("profile_images").child(fileName)
+            
+            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, err) in
+                if let err = err {
+                    print("Failed to upload image to storage with error: \(err)")
+                    return
+                }
+                
+                storageRef.downloadURL(completion: { (downloadURL, err) in
+                    if let err = err {
+                        print("Failed to fetch downloadURL for the profilePicture with error: \(err)")
+                        return
+                    }
+                    
+                    guard let profileImageURL = downloadURL?.absoluteString else { return }
+                    print("Successfully uploaded profile image: \(profileImageURL)")
+                    
+                    /* Store User Info in db */
+                    let userInfo = ["username": username, "profileImageUrl": profileImageURL]
+                    let valuesToStore = [user.uid: userInfo]
+                    Database.database().reference().child("users").updateChildValues(valuesToStore, withCompletionBlock: { (err, ref) in
+                        if let err = err {
+                            print("Failed to save user info to db with error: \(err)")
+                            return
+                        }
+                        
+                        print("Successfully saved user info to db")
+                    })
+                })
+                
+            })
+        }
     }
     
     @objc func textWasEdited() {
@@ -98,19 +132,36 @@ class RegisterView: UIView {
     }
     
     @objc func addPhotoWasClicked() {
-        delegate?.getPhoto()
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            plusPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        buildView()
     }
     
     fileprivate func buildView() {
-        self.backgroundColor = .white
+        view.backgroundColor = .white
         placeAddPhotoButton()
         placeInputFields()
     }
     
     fileprivate func placeAddPhotoButton() {
-        self.addSubview(plusPhotoButton)
+        view.addSubview(plusPhotoButton)
         
-        plusPhotoButton.anchor(centerXAnchor: self.centerXAnchor, centerYAnchor: nil, topAnchor: self.safeTopAnchor, rightAnchor: nil, bottomAnchor: nil, leftAnchor: nil, topPadding: 20)
+        plusPhotoButton.anchor(centerXAnchor: view.centerXAnchor, centerYAnchor: nil, topAnchor: view.safeTopAnchor, rightAnchor: nil, bottomAnchor: nil, leftAnchor: nil, topPadding: 20)
         plusPhotoButton.setSize(widthAnchor: 140, heightAnchor: 140)
     }
     
@@ -122,18 +173,11 @@ class RegisterView: UIView {
         stackView.spacing = 10
         let stackViewHeight = CGFloat(stackView.arrangedSubviews.count * Int(stackView.spacing + 50))
         
-        self.addSubview(stackView)
+        view.addSubview(stackView)
         
-        stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: plusPhotoButton.safeBottomAnchor, rightAnchor: self.safeRightAnchor, bottomAnchor: nil, leftAnchor: self.safeLeftAnchor, topPadding: 20, rightPadding: 40, leftPadding: 40)
+        stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: plusPhotoButton.safeBottomAnchor, rightAnchor: view.safeRightAnchor, bottomAnchor: nil, leftAnchor: view.safeLeftAnchor, topPadding: 20, rightPadding: 40, leftPadding: 40)
         stackView.setSize(widthAnchor: nil, heightAnchor: stackViewHeight)
         
     }
     
-    func updateAddPhotoButton(withImage newImage: UIImage) {
-        plusPhotoButton.setImage(newImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        plusPhotoButton.layer.borderColor = UIColor.black.cgColor
-        plusPhotoButton.layer.borderWidth = 3
-        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width/2
-        plusPhotoButton.layer.masksToBounds = true
-    }
 }
