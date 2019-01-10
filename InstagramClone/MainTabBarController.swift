@@ -22,15 +22,14 @@ class MainTabBarController: UITabBarController {
                 let navController = UINavigationController(rootViewController: loginController)
                 navController.isNavigationBarHidden = true
                 self.present(navController, animated: true, completion: nil)
-//                let vc = LoginController()
-//                vc.view.backgroundColor = .purple
-//                let navVC = UINavigationController(rootViewController: vc)
-//                navVC.isNavigationBarHidden = true
-//                self.present(navVC, animated: false, completion: nil)
             }
-            
             return
         }
+        
+        setupViewControllers()
+    }
+    
+    func setupViewControllers() {
         
         // MARK: Collection View Creation
         // Create a layout to that the Collection view will use.
