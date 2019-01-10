@@ -11,10 +11,11 @@
 		651770C021E111540051F3E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 651770BF21E111540051F3E1 /* Assets.xcassets */; };
 		651770C321E111540051F3E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 651770C121E111540051F3E1 /* LaunchScreen.storyboard */; };
 		652182A221E14C8E00F0BB70 /* UIColor+ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */; };
-		652BFDAA21E2ABEB00F4E58A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDA921E2ABEB00F4E58A /* ViewController.swift */; };
+		652BFDAA21E2ABEB00F4E58A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDA921E2ABEB00F4E58A /* SignUpController.swift */; };
 		652BFDAC21E2AE5C00F4E58A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDAB21E2AE5C00F4E58A /* MainTabBarController.swift */; };
 		652BFDAE21E2B54F00F4E58A /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDAD21E2B54F00F4E58A /* UserProfileController.swift */; };
 		652BFDB121E2D7E300F4E58A /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */; };
+		65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DA67CC21E6E48C00338454 /* LoginController.swift */; };
 		65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */; };
 		65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */; };
 		65EC535821E1318B007D4BD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65EC535721E1318B007D4BD0 /* GoogleService-Info.plist */; };
@@ -30,10 +31,11 @@
 		651770C221E111540051F3E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		651770C421E111540051F3E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ThemeColors.swift"; sourceTree = "<group>"; };
-		652BFDA921E2ABEB00F4E58A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		652BFDA921E2ABEB00F4E58A /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		652BFDAB21E2AE5C00F4E58A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		652BFDAD21E2B54F00F4E58A /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		65DA67CC21E6E48C00338454 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvenienceInits.swift"; sourceTree = "<group>"; };
 		65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchoring.swift"; sourceTree = "<group>"; };
 		65EC535721E1318B007D4BD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		651770B721E111520051F3E1 /* InstagramClone */ = {
 			isa = PBXGroup;
 			children = (
+				65DA67CB21E6E48200338454 /* Login */,
 				652BFDAF21E2D7A600F4E58A /* UserProfile */,
 				65EC535221E1176D007D4BD0 /* Utils */,
 				651770B821E111520051F3E1 /* AppDelegate.swift */,
@@ -88,7 +91,6 @@
 				651770C121E111540051F3E1 /* LaunchScreen.storyboard */,
 				651770C421E111540051F3E1 /* Info.plist */,
 				65EC535721E1318B007D4BD0 /* GoogleService-Info.plist */,
-				652BFDA921E2ABEB00F4E58A /* ViewController.swift */,
 				652BFDAB21E2AE5C00F4E58A /* MainTabBarController.swift */,
 			);
 			path = InstagramClone;
@@ -101,6 +103,15 @@
 				652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		65DA67CB21E6E48200338454 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				652BFDA921E2ABEB00F4E58A /* SignUpController.swift */,
+				65DA67CC21E6E48C00338454 /* LoginController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		65EC535221E1176D007D4BD0 /* Utils */ = {
@@ -248,13 +259,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				652BFDAA21E2ABEB00F4E58A /* ViewController.swift in Sources */,
+				652BFDAA21E2ABEB00F4E58A /* SignUpController.swift in Sources */,
 				652182A221E14C8E00F0BB70 /* UIColor+ThemeColors.swift in Sources */,
 				652BFDAC21E2AE5C00F4E58A /* MainTabBarController.swift in Sources */,
 				652BFDB121E2D7E300F4E58A /* UserProfileHeader.swift in Sources */,
 				65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */,
 				652BFDAE21E2B54F00F4E58A /* UserProfileController.swift in Sources */,
 				65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */,
+				65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */,
 				651770B921E111520051F3E1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

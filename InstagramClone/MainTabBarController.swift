@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabBarController: UITabBarController {
     
@@ -14,6 +15,16 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let loginController = LoginController()
+                let navController = UINavigationController(rootViewController: loginController)
+                self.present(navController, animated: true, completion: nil)
+            }
+            
+            return
+        }
         
         // MARK: Collection View Creation
         // Create a layout to that the Collection view will use.
