@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         
         // MARK: Window Creation
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -23,8 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Set the rootViewController to our custom MainTabBarController
         window?.rootViewController = MainTabBarController()
-        
-        FirebaseApp.configure()
         return true
     }
 

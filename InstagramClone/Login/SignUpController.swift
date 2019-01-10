@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -60,6 +60,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         button.isEnabled = false
         return button
     }()
+    
+    let loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Already have an account? Login.", for: .normal)
+        button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handleShowLogin() {
+        let loginController = LoginController()
+        navigationController?.pushViewController(loginController, animated: true)
+    }
     
     
     @objc func signUpWasClicked() {
@@ -156,6 +168,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.backgroundColor = .white
         placeAddPhotoButton()
         placeInputFields()
+        
+        view.addSubview(loginButton)
+        loginButton.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: nil, rightAnchor: view.safeRightAnchor, bottomAnchor: view.safeBottomAnchor, leftAnchor: view.safeLeftAnchor)
+        loginButton.setSize(widthAnchor: nil, heightAnchor: 50)
     }
     
     fileprivate func placeAddPhotoButton() {
