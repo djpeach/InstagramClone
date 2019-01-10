@@ -17,15 +17,34 @@ class LoginController: UIViewController {
         return button
     }()
     
+    let logoContainerView: UIView = {
+        let view = UIView()
+        
+        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
+        logoImageView.contentMode = .scaleAspectFill
+        view.addSubview(logoImageView)
+        logoImageView.anchor(centerXAnchor: view.centerXAnchor, centerYAnchor: view.centerYAnchor, topAnchor: nil, rightAnchor: nil, bottomAnchor: nil, leftAnchor: nil)
+        
+        view.backgroundColor = UIColor(red: 0, green: 120, blue: 175)
+        return view
+    }()
+    
     @objc func handleShowSignUp() {
         let signUpController = SignUpController()
+//        navigationController?.isNavigationBarHidden = true
         navigationController?.pushViewController(signUpController, animated: true)
-        
-        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(logoContainerView)
+        logoContainerView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: view.topAnchor, rightAnchor: view.rightAnchor, bottomAnchor: nil, leftAnchor: view.leftAnchor)
+        logoContainerView.setSize(widthAnchor: nil, heightAnchor: 200)
         
         view.backgroundColor = .white
         

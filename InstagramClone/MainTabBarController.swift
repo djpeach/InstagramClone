@@ -20,7 +20,13 @@ class MainTabBarController: UITabBarController {
             DispatchQueue.main.async {
                 let loginController = LoginController()
                 let navController = UINavigationController(rootViewController: loginController)
+                navController.isNavigationBarHidden = true
                 self.present(navController, animated: true, completion: nil)
+//                let vc = LoginController()
+//                vc.view.backgroundColor = .purple
+//                let navVC = UINavigationController(rootViewController: vc)
+//                navVC.isNavigationBarHidden = true
+//                self.present(navVC, animated: false, completion: nil)
             }
             
             return
