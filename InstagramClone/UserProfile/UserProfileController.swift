@@ -38,6 +38,10 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             print("Perform log out")
             do {
                 try Auth.auth().signOut()
+                let loginController = LoginController()
+                let navController = UINavigationController(rootViewController: loginController)
+                navController.isNavigationBarHidden = true
+                self.present(navController, animated: true, completion: nil)
             } catch let signOutErr {
                 print("Failed to sign out with error: \(signOutErr)")
             }
