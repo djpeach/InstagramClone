@@ -30,24 +30,40 @@ class MainTabBarController: UITabBarController {
     }
     
     func setupViewControllers() {
+        // home
+        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"))
         
-        // MARK: Collection View Creation
-        // Create a layout to that the Collection view will use.
-        // This will determine things such as the supplementary views the CV can use
-        //     In the case of UICollectionViewFlowLayout, the supp views are a header and/or footer.
+        // search
+        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"))
+        
+        // plus
+        let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"))
+        
+        // liked
+        let likedNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"))
+        
+        // user profile
         let layout = UICollectionViewFlowLayout()
-        // Create a VC from our custom ColViewVC
         let userProfileVC = UserProfileViewController(collectionViewLayout: layout)
-        
-        // Set that VC as the rootVC of our navController
-        let navController = UINavigationController(rootViewController: userProfileVC)
-        
-        // The tabBar of the VC will be used when added to a tab bar controller
-        // In our case, the VC we are in is a UITabBarController, so it is used now
-        navController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected").withRenderingMode(.alwaysOriginal)
-        navController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected").withRenderingMode(.alwaysOriginal)
+        let userProfileNavController = UINavigationController(rootViewController: userProfileVC)
+        userProfileNavController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected").withRenderingMode(.alwaysOriginal)
+        userProfileNavController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected").withRenderingMode(.alwaysOriginal)
         
         // This is where we set the stack of ViewControllers on the navigation stack
-        viewControllers = [navController]
+        viewControllers = [homeNavController, searchNavController, plusNavController, likedNavController, userProfileNavController]
+        
+        guard let items = tabBar.items else { return }
+        
+        for item in items {
+            item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
+        }
+    }
+    
+    fileprivate func templateNavController(unselectedImage: UIImage, selectedImage: UIImage) -> UINavigationController {
+        let templateController = UIViewController()
+        let templateNavController = UINavigationController(rootViewController: templateController)
+        templateNavController.tabBarItem.image = unselectedImage.withRenderingMode(.alwaysOriginal)
+        templateNavController.tabBarItem.selectedImage = selectedImage.withRenderingMode(.alwaysOriginal)
+        return templateNavController
     }
 }
