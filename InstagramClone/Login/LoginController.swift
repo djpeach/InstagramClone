@@ -10,9 +10,11 @@ import UIKit
 
 class LoginController: UIViewController {
     
-    let signUpButton: UIButton = {
+    let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Don't have an account? Sign Up.", for: .normal)
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSMutableAttributedString.Key.font: UIFont.systemFont(ofSize: 18), NSMutableAttributedString.Key.foregroundColor: UIColor.lightGray])
+        attributedTitle.append(NSMutableAttributedString(string: "Sign Up", attributes: [NSMutableAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSMutableAttributedString.Key.foregroundColor: UIColor(red: 17, green: 154, blue: 237)]))
+        button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
@@ -27,6 +29,39 @@ class LoginController: UIViewController {
         
         view.backgroundColor = UIColor(red: 0, green: 120, blue: 175)
         return view
+    }()
+    
+    let emailTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Email"
+        tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
+        tf.borderStyle = .roundedRect
+        tf.font = UIFont.systemFont(ofSize: 18)
+        tf.addTarget(self, action: #selector(textWasEdited), for: .editingChanged)
+        return tf
+    }()
+    
+    let passwordTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Password"
+        tf.isSecureTextEntry = true
+        tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
+        tf.borderStyle = .roundedRect
+        tf.font = UIFont.systemFont(ofSize: 18)
+        tf.addTarget(self, action: #selector(textWasEdited), for: .editingChanged)
+        return tf
+    }()
+    
+    let loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Login", for: .normal)
+        button.backgroundColor = UIColor(red: 149, green: 204, blue: 244)
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.setTitleColor(.white, for: .normal)
+//        button.addTarget(self, action: #selector(loginWasClicked), for: .touchUpInside)
+        button.isEnabled = false
+        return button
     }()
     
     @objc func handleShowSignUp() {
@@ -48,8 +83,40 @@ class LoginController: UIViewController {
         
         view.backgroundColor = .white
         
-        view.addSubview(signUpButton)
-        signUpButton.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: nil, rightAnchor: view.safeRightAnchor, bottomAnchor: view.safeBottomAnchor, leftAnchor: view.safeLeftAnchor)
-        signUpButton.setSize(widthAnchor: nil, heightAnchor: 50)
+        view.addSubview(dontHaveAccountButton)
+        dontHaveAccountButton.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: nil, rightAnchor: view.safeRightAnchor, bottomAnchor: view.safeBottomAnchor, leftAnchor: view.safeLeftAnchor)
+        dontHaveAccountButton.setSize(widthAnchor: nil, heightAnchor: 50)
+        
+        placeInputFields()
+    }
+    
+    @objc func textWasEdited() {
+        let emailHasText = emailTextField.text?.count ?? 0 > 0
+        let passwordHasText = passwordTextField.text?.count ?? 0 > 0
+        
+        let formIsFilled = emailHasText && passwordHasText
+        
+        if formIsFilled {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = .tBlue
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .tLightBlue
+        }
+    }
+    
+    fileprivate func placeInputFields() {
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
+        
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        let stackViewHeight = CGFloat(stackView.arrangedSubviews.count * Int(stackView.spacing + 40))
+        
+        view.addSubview(stackView)
+        
+        stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: logoContainerView.safeBottomAnchor, rightAnchor: view.safeRightAnchor, bottomAnchor: nil, leftAnchor: view.safeLeftAnchor, topPadding: 40, rightPadding: 40, leftPadding: 40)
+        stackView.setSize(widthAnchor: nil, heightAnchor: stackViewHeight)
+        
     }
 }
