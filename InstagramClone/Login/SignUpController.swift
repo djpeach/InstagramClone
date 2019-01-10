@@ -49,7 +49,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return tf
     }()
     
-    let signUpButton: UIButton = {
+    let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = UIColor(red: 149, green: 204, blue: 244)
@@ -63,14 +63,15 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Already have an account? Login.", for: .normal)
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSMutableAttributedString.Key.font: UIFont.systemFont(ofSize: 18), NSMutableAttributedString.Key.foregroundColor: UIColor.lightGray])
+        attributedTitle.append(NSMutableAttributedString(string: "Login", attributes: [NSMutableAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSMutableAttributedString.Key.foregroundColor: UIColor(red: 17, green: 154, blue: 237)]))
+        button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         return button
     }()
     
     @objc func handleShowLogin() {
-        let loginController = LoginController()
-        navigationController?.pushViewController(loginController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -135,11 +136,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         let formIsFilled = emailHasText && usernameHasText && passwordHasText
         
         if formIsFilled {
-            signUpButton.isEnabled = true
-            signUpButton.backgroundColor = .tBlue
+            alreadyHaveAccountButton.isEnabled = true
+            alreadyHaveAccountButton.backgroundColor = .tBlue
         } else {
-            signUpButton.isEnabled = false
-            signUpButton.backgroundColor = .tLightBlue
+            alreadyHaveAccountButton.isEnabled = false
+            alreadyHaveAccountButton.backgroundColor = .tLightBlue
         }
     }
     
@@ -182,12 +183,12 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     fileprivate func placeInputFields() {
-        let stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, signUpButton])
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, alreadyHaveAccountButton])
         
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
         stackView.spacing = 10
-        let stackViewHeight = CGFloat(stackView.arrangedSubviews.count * Int(stackView.spacing + 50))
+        let stackViewHeight = CGFloat(stackView.arrangedSubviews.count * Int(stackView.spacing + 40))
         
         view.addSubview(stackView)
         
