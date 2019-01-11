@@ -15,6 +15,7 @@
 		652BFDAC21E2AE5C00F4E58A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDAB21E2AE5C00F4E58A /* MainTabBarController.swift */; };
 		652BFDAE21E2B54F00F4E58A /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDAD21E2B54F00F4E58A /* UserProfileController.swift */; };
 		652BFDB121E2D7E300F4E58A /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */; };
+		6571980221E8164400A9D601 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571980121E8164400A9D601 /* PhotoSelectorController.swift */; };
 		65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DA67CC21E6E48C00338454 /* LoginController.swift */; };
 		65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */; };
 		65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */; };
@@ -35,6 +36,7 @@
 		652BFDAB21E2AE5C00F4E58A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		652BFDAD21E2B54F00F4E58A /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		6571980121E8164400A9D601 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		65DA67CC21E6E48C00338454 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvenienceInits.swift"; sourceTree = "<group>"; };
 		65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchoring.swift"; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		651770B721E111520051F3E1 /* InstagramClone */ = {
 			isa = PBXGroup;
 			children = (
+				6571980021E8163500A9D601 /* AddPhoto */,
 				65DA67CB21E6E48200338454 /* Login */,
 				652BFDAF21E2D7A600F4E58A /* UserProfile */,
 				65EC535221E1176D007D4BD0 /* Utils */,
@@ -103,6 +106,14 @@
 				652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		6571980021E8163500A9D601 /* AddPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				6571980121E8164400A9D601 /* PhotoSelectorController.swift */,
+			);
+			path = AddPhoto;
 			sourceTree = "<group>";
 		};
 		65DA67CB21E6E48200338454 /* Login */ = {
@@ -264,6 +275,7 @@
 				652BFDAC21E2AE5C00F4E58A /* MainTabBarController.swift in Sources */,
 				652BFDB121E2D7E300F4E58A /* UserProfileHeader.swift in Sources */,
 				65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */,
+				6571980221E8164400A9D601 /* PhotoSelectorController.swift in Sources */,
 				652BFDAE21E2B54F00F4E58A /* UserProfileController.swift in Sources */,
 				65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */,
 				65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */,
