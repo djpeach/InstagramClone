@@ -9,12 +9,26 @@
 import UIKit
 import Firebase
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = tabBarController.viewControllers!.index(of: viewController)
+        if index == 2 {
+            let layout = UICollectionViewFlowLayout()
+            let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
+            let navController = UINavigationController(rootViewController: photoSelectorController)
+            present(navController, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
     
     // MARK: View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.delegate = self
         
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
@@ -31,7 +45,7 @@ class MainTabBarController: UITabBarController {
     
     func setupViewControllers() {
         // home
-        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"))
+        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         // search
         let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"))
@@ -59,9 +73,8 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    fileprivate func templateNavController(unselectedImage: UIImage, selectedImage: UIImage) -> UINavigationController {
-        let templateController = UIViewController()
-        let templateNavController = UINavigationController(rootViewController: templateController)
+    fileprivate func templateNavController(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController = UIViewController()) -> UINavigationController {
+        let templateNavController = UINavigationController(rootViewController: rootViewController)
         templateNavController.tabBarItem.image = unselectedImage.withRenderingMode(.alwaysOriginal)
         templateNavController.tabBarItem.selectedImage = selectedImage.withRenderingMode(.alwaysOriginal)
         return templateNavController
