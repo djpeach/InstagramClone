@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Photos
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
@@ -17,7 +18,14 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             let layout = UICollectionViewFlowLayout()
             let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
             let navController = UINavigationController(rootViewController: photoSelectorController)
-            present(navController, animated: true, completion: nil)
+            PHPhotoLibrary.requestAuthorization { (authStatus) in
+                switch authStatus {
+                case .authorized:
+                    self.present(navController, animated: true, completion: nil)
+                default:
+                    break
+                }
+            }
             return false
         }
         return true
