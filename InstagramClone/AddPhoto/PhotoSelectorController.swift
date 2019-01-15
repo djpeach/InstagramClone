@@ -24,12 +24,16 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     var images = [UIImage]()
     
-    fileprivate func fetchPhotos() {
+    fileprivate func assetFetchOptions() -> PHFetchOptions {
         let fetchOptions = PHFetchOptions()
         fetchOptions.fetchLimit = 10
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
-        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        return fetchOptions
+    }
+    
+    fileprivate func fetchPhotos() {
+        let allPhotos = PHAsset.fetchAssets(with: .image, options: assetFetchOptions())
         allPhotos.enumerateObjects { (asset, count, stop) in
             let imageManager = PHImageManager.default()
             let targetSize = CGSize(width: 350, height: 350)
