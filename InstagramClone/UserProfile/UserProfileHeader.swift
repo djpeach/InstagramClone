@@ -14,8 +14,8 @@ class UserProfileHeader: UICollectionViewCell {
     // Create dynamic optional user var
     var user: User? {
         didSet {
-            // When it gets set (will get set by UserProfile's fetchUser()), update the image
-            setupProfileImage()
+            guard let profileImageUrl = user?.profileImageUrl else { return }
+            profileImageView.loadImage(urlString: profileImageUrl)
             
             userNameLabel.text = self.user?.username
         }
@@ -23,8 +23,8 @@ class UserProfileHeader: UICollectionViewCell {
     
     // MARK: Create view for profile image
     
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.image = #imageLiteral(resourceName: "profile_selected")
         return iv
     }()
@@ -150,24 +150,6 @@ class UserProfileHeader: UICollectionViewCell {
         
         bottomDividerView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: stackView.bottomAnchor, rightAnchor: self.safeRightAnchor, bottomAnchor: nil, leftAnchor: self.safeLeftAnchor)
         bottomDividerView.setSize(widthAnchor: nil, heightAnchor: 0.5)
-    }
-    
-    fileprivate func setupProfileImage() {
-        
-        // Get imageUrl from user object
-        guard let profileImageUrl = user?.profileImageUrl else { return }
-        guard let url = URL(string: profileImageUrl) else { return }
-        
-        // Use Swift's URLSession's shared session to fetch the image
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            
-            // get back on main UI Thread
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-            }.resume()
     }
     
     required init?(coder aDecoder: NSCoder) {
