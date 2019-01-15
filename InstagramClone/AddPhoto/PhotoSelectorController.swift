@@ -39,7 +39,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         DispatchQueue.global(qos: .background).async {
             allPhotos.enumerateObjects { (asset, count, stop) in
                 let imageManager = PHImageManager.default()
-                let targetSize = CGSize(width: 350, height: 350)
+                let targetSize = CGSize(width: 200, height: 200)
                 let options = PHImageRequestOptions()
                 options.isSynchronous = true
                 imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
