@@ -22,7 +22,9 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         fetchPhotos()
     }
     
+    
     var images = [UIImage]()
+    var assets = [PHAsset]()
     
     fileprivate func assetFetchOptions() -> PHFetchOptions {
         let fetchOptions = PHFetchOptions()
@@ -44,6 +46,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
                 imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
                     if let image = image {
                         self.images.append(image)
+                        self.assets.append(asset)
                     }
                     // the the count of enums equals the count of PHotos, reloat Data
                     if count == allPhotos.count - 1 {
