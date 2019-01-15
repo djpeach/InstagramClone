@@ -72,7 +72,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "suppId", for: indexPath) as! PhotoSelectorHeader
-        let imageManager = PHImageManager()
+        let imageManager = PHImageManager.default()
         if let image = self.selectedImage {
             if let index = self.images.index(of: image) {
                 let selectedAsset = self.assets[index]
