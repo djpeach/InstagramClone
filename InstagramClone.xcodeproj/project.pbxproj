@@ -17,6 +17,7 @@
 		652BFDB121E2D7E300F4E58A /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */; };
 		6571980221E8164400A9D601 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571980121E8164400A9D601 /* PhotoSelectorController.swift */; };
 		6571980421E82A2700A9D601 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571980321E82A2700A9D601 /* PhotoSelectorCell.swift */; };
+		65D8901021ED861000CDC6A3 /* PhotoSelectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D8900F21ED861000CDC6A3 /* PhotoSelectionHeader.swift */; };
 		65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DA67CC21E6E48C00338454 /* LoginController.swift */; };
 		65EC535421E1178C007D4BD0 /* UIColor+ConvenienceInits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */; };
 		65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */; };
@@ -39,6 +40,7 @@
 		652BFDB021E2D7E300F4E58A /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		6571980121E8164400A9D601 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		6571980321E82A2700A9D601 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
+		65D8900F21ED861000CDC6A3 /* PhotoSelectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionHeader.swift; sourceTree = "<group>"; };
 		65DA67CC21E6E48C00338454 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		65EC535321E1178C007D4BD0 /* UIColor+ConvenienceInits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvenienceInits.swift"; sourceTree = "<group>"; };
 		65EC535521E117A9007D4BD0 /* UIView+Anchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchoring.swift"; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				6571980121E8164400A9D601 /* PhotoSelectorController.swift */,
 				6571980321E82A2700A9D601 /* PhotoSelectorCell.swift */,
+				65D8900F21ED861000CDC6A3 /* PhotoSelectionHeader.swift */,
 			);
 			path = AddPhoto;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				652BFDAE21E2B54F00F4E58A /* UserProfileController.swift in Sources */,
 				65EC535621E117A9007D4BD0 /* UIView+Anchoring.swift in Sources */,
 				65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */,
+				65D8901021ED861000CDC6A3 /* PhotoSelectionHeader.swift in Sources */,
 				651770B921E111520051F3E1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
