@@ -34,20 +34,23 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     fileprivate func fetchPhotos() {
         let allPhotos = PHAsset.fetchAssets(with: .image, options: assetFetchOptions())
-        allPhotos.enumerateObjects { (asset, count, stop) in
-            let imageManager = PHImageManager.default()
-            let targetSize = CGSize(width: 350, height: 350)
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
-                if let image = image {
-                    self.images.append(image)
-                }
-                // the the count of enums equals the count of PHotos, reloat Data
-                if count == allPhotos.count - 1 {
-                    self.collectionView.reloadData()
-                }
-            })
+        
+        DispatchQueue.global(qos: .background).async {
+            allPhotos.enumerateObjects { (asset, count, stop) in
+                let imageManager = PHImageManager.default()
+                let targetSize = CGSize(width: 350, height: 350)
+                let options = PHImageRequestOptions()
+                options.isSynchronous = true
+                imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
+                    if let image = image {
+                        self.images.append(image)
+                    }
+                    // the the count of enums equals the count of PHotos, reloat Data
+                    if count == allPhotos.count - 1 {
+                        self.collectionView.reloadData()
+                    }
+                })
+            }
         }
     }
     
