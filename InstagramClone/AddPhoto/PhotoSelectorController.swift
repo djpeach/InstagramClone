@@ -47,7 +47,9 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
                     }
                     // the the count of enums equals the count of PHotos, reloat Data
                     if count == allPhotos.count - 1 {
-                        self.collectionView.reloadData()
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
                     }
                 })
             }
