@@ -11,6 +11,8 @@ import Firebase
 
 class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    fileprivate var posts = [Post]()
+    
     let cellId = "cellId"
     
     override func viewDidLoad() {
@@ -26,6 +28,29 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupLogOutButton()
+        fetchPosts()
+    }
+    
+    fileprivate func fetchPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let databaseRef = Database.database().reference().child("posts").child(uid)
+        
+        databaseRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionaries = snapshot.value as? [String : Any] else { return }
+            
+            dictionaries.forEach({ (key: String, value: Any) in
+                //                print("Key \(key), Value: \(value)")
+                
+                guard let dictionary = value as? [String : Any] else { return }
+                
+                let post = Post(dictionary: dictionary)
+                self.posts.append(post)
+            })
+            
+            self.collectionView.reloadData()
+        }) { (err) in
+            print("Failed to fetch posts with error: \(err)")
+        }
     }
     
     fileprivate func setupLogOutButton() {
@@ -54,7 +79,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     // MARK: Build Collection View
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return self.posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -99,16 +124,16 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     // Fetch and set user to user var
     fileprivate func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-        guard let dictionary = snapshot.value as? [String: Any] else { return }
-        
-        self.user = User(dictionary: dictionary)
-        self.navigationItem.title = self.user?.username
-        
-        // Call the collectionViewDelegate methods again
-        // (this will set the header user, and update the photo)
-        self.collectionView.reloadData()
-        
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            
+            self.user = User(dictionary: dictionary)
+            self.navigationItem.title = self.user?.username
+            
+            // Call the collectionViewDelegate methods again
+            // (this will set the header user, and update the photo)
+            self.collectionView.reloadData()
+            
         }) { (err) in
             print("Failed to fetch user: \(err)")
         }
