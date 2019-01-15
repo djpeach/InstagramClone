@@ -72,8 +72,14 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
+    var header: PhotoSelectorHeader?
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "suppId", for: indexPath) as! PhotoSelectorHeader
+        
+        self.header = header
+        
+        header.backgroundColor = .red
         let imageManager = PHImageManager.default()
         if let image = self.selectedImage {
             if let index = self.images.index(of: image) {
@@ -84,8 +90,6 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
                 }
             }
         }
-        header.backgroundColor = .red
-        header.photoImageView.image = self.selectedImage
         return header
     }
     
@@ -133,7 +137,10 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     }
     
     @objc func handleNext() {
-        print("handle next")
+        let sharePhotoController = SharePhotoController()
+        //        sharePhotoController.selectedImage = self.selectedImage // why didnt he do this? he needs the size of the photo in the next page to upload to firebase
+        sharePhotoController.selectedImage = self.header?.photoImageView.image
+        navigationController?.pushViewController(sharePhotoController, animated: true)
     }
     
     @objc func handleCancel() {
