@@ -21,7 +21,9 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             PHPhotoLibrary.requestAuthorization { (authStatus) in
                 switch authStatus {
                 case .authorized:
-                    self.present(navController, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        self.present(navController, animated: true, completion: nil)
+                    }
                 default:
                     break
                 }

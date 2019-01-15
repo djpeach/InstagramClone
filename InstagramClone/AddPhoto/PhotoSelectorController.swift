@@ -12,7 +12,7 @@ import Photos
 class PhotoSelectorController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .white
         
         setupNavigationButtons()
         
@@ -28,6 +28,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     fileprivate func assetFetchOptions() -> PHFetchOptions {
         let fetchOptions = PHFetchOptions()
+        //        fetchOptions.fetchLimit = 15
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
         return fetchOptions
@@ -44,14 +45,15 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
                 options.isSynchronous = true
                 imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
                     if let image = image {
-                        self.images.append(image)
                         self.assets.append(asset)
+                        self.images.append(image)
                         
                         if self.selectedImage == nil {
                             self.selectedImage = image
                         }
                     }
                     // the the count of enums equals the count of PHotos, reloat Data
+                    
                     if count == allPhotos.count - 1 {
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
