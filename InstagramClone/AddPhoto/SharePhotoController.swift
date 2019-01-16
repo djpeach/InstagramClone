@@ -96,7 +96,7 @@ class SharePhotoController: UIViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let userPostRef = Database.database().reference().child("posts").child(uid)
         let ref = userPostRef.childByAutoId()
-        let values = ["imageUrl": imageUrl, "caption": caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date().timeIntervalSince1970] as [String : Any]
+        let values = ["imageUrl": imageUrl, "caption": caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date().timeIntervalSince1970, "invertedCreationDate": -1 * Date().timeIntervalSince1970] as [String : Any]
         ref.updateChildValues(values) { (err, ref) in
             if let err = err {
                 print("Error saving post in database with error: \(err)")

@@ -53,7 +53,8 @@ class HomePostCell: UICollectionViewCell {
         self.addSubViews(views: [userProfileImageView, photoImageView, usernameLabel, optionsButton])
         userProfileImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 8, left: 8, bottom: 0, right: 0))
         userProfileImageView.setSize(width: 40, height: 40)
-        photoImageView.anchor(top: userProfileImageView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
+        photoImageView.anchor(top: userProfileImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
+        photoImageView.setSize(widthAnchor: nil, heightAnchor: widthAnchor)
         usernameLabel.anchor(top: topAnchor, leading: userProfileImageView.trailingAnchor, bottom: userProfileImageView.bottomAnchor, trailing: optionsButton.leadingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 0))
         optionsButton.anchor(top: topAnchor, leading: nil, bottom: userProfileImageView.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 8))
     }
