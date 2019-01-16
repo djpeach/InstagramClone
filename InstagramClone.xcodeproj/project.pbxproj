@@ -19,6 +19,7 @@
 		6571980421E82A2700A9D601 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571980321E82A2700A9D601 /* PhotoSelectorCell.swift */; };
 		65BC662F21EEA80300B0E199 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC662E21EEA80300B0E199 /* HomeController.swift */; };
 		65BC663121EEA8D300B0E199 /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC663021EEA8D300B0E199 /* HomePostCell.swift */; };
+		65BC667121EED90300B0E199 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC667021EED90300B0E199 /* User.swift */; };
 		65D8901021ED861000CDC6A3 /* PhotoSelectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D8900F21ED861000CDC6A3 /* PhotoSelectionHeader.swift */; };
 		65D8901221ED8A1900CDC6A3 /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D8901121ED8A1900CDC6A3 /* SharePhotoController.swift */; };
 		65D8901521ED8C5C00CDC6A3 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D8901421ED8C5C00CDC6A3 /* Posts.swift */; };
@@ -48,6 +49,7 @@
 		6571980321E82A2700A9D601 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		65BC662E21EEA80300B0E199 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		65BC663021EEA8D300B0E199 /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
+		65BC667021EED90300B0E199 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		65D8900F21ED861000CDC6A3 /* PhotoSelectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionHeader.swift; sourceTree = "<group>"; };
 		65D8901121ED8A1900CDC6A3 /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		65D8901421ED8C5C00CDC6A3 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				65D8901421ED8C5C00CDC6A3 /* Posts.swift */,
+				65BC667021EED90300B0E199 /* User.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */,
 				65D8901021ED861000CDC6A3 /* PhotoSelectionHeader.swift in Sources */,
 				651770B921E111520051F3E1 /* AppDelegate.swift in Sources */,
+				65BC667121EED90300B0E199 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

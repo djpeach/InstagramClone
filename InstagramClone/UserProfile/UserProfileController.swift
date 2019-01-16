@@ -29,8 +29,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
         setupLogOutButton()
 //        fetchPosts()
-        
-        fetchOrderedPosts()
     }
     
     fileprivate func fetchOrderedPosts() {
@@ -42,10 +40,10 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         databaseRef.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String : Any] else { return }
             
-            guard let user = self.user else { return }
+            guard let user = self.user else {return}
             
             let post = Post(user: user, dictionary: dictionary)
-            self.posts.append(post)
+            self.posts.insert(post, at: 0)
             
             self.collectionView.reloadData()
         }) { (err) in
@@ -155,6 +153,8 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             // (this will set the header user, and update the photo)
             self.collectionView.reloadData()
             
+            self.fetchOrderedPosts()
+            
         }) { (err) in
             print("Failed to fetch user: \(err)")
         }
@@ -164,12 +164,12 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
 
 // MARK: Define User object
 
-struct User {
-    let username: String
-    let profileImageUrl: String
-    
-    init(dictionary: [String: Any]) {
-        self.username = dictionary["username"] as? String ?? ""
-        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-    }
-}
+//struct User {
+//    let username: String
+//    let profileImageUrl: String
+//    
+//    init(dictionary: [String: Any]) {
+//        self.username = dictionary["username"] as? String ?? ""
+//        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
+//    }
+//}
