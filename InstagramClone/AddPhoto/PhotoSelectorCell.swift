@@ -23,8 +23,8 @@ class PhotoSelectorCell: UICollectionViewCell {
         
         backgroundColor = .brown
         
-        addSubview(photoImageView)
-        photoImageView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: self.topAnchor, rightAnchor: self.rightAnchor, bottomAnchor: self.bottomAnchor, leftAnchor: self.leftAnchor)
+        self.addSubViews(views: [photoImageView])
+        photoImageView.fillSuperView()
     }
     
     required init?(coder aDecoder: NSCoder) {

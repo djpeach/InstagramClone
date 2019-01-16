@@ -174,15 +174,15 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         placeInputFields()
         
         view.addSubview(loginButton)
-        loginButton.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: nil, rightAnchor: view.safeRightAnchor, bottomAnchor: view.safeBottomAnchor, leftAnchor: view.safeLeftAnchor)
-        loginButton.setSize(widthAnchor: nil, heightAnchor: 50)
+        loginButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        loginButton.setSize(width: nil, height: 50)
     }
     
     fileprivate func placeAddPhotoButton() {
         view.addSubview(plusPhotoButton)
         
-        plusPhotoButton.anchor(centerXAnchor: view.centerXAnchor, centerYAnchor: nil, topAnchor: view.safeTopAnchor, rightAnchor: nil, bottomAnchor: nil, leftAnchor: nil, topPadding: 20)
-        plusPhotoButton.setSize(widthAnchor: 140, heightAnchor: 140)
+        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
+        plusPhotoButton.setSize(width: 140, height: 140)
     }
     
     fileprivate func placeInputFields() {
@@ -191,12 +191,12 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
         stackView.spacing = 10
-        let stackViewHeight = CGFloat(stackView.arrangedSubviews.count * Int(stackView.spacing + 40))
+        let stackViewHeight = stackView.arrangedSubviews.count * Int(stackView.spacing + 40)
         
         view.addSubview(stackView)
-        
-        stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: plusPhotoButton.safeBottomAnchor, rightAnchor: view.safeRightAnchor, bottomAnchor: nil, leftAnchor: view.safeLeftAnchor, topPadding: 20, rightPadding: 40, leftPadding: 40)
-        stackView.setSize(widthAnchor: nil, heightAnchor: stackViewHeight)
+        stackView.anchor(top: plusPhotoButton.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 20, bottom: 0, right: 20))
+        stackView.anchor(top: plusPhotoButton.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        stackView.setSize(width: nil, height: stackViewHeight)
         
     }
     

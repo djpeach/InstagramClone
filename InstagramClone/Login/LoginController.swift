@@ -26,7 +26,7 @@ class LoginController: UIViewController {
         let logoImageView = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
         logoImageView.contentMode = .scaleAspectFill
         view.addSubview(logoImageView)
-        logoImageView.anchor(centerXAnchor: view.centerXAnchor, centerYAnchor: view.centerYAnchor, topAnchor: nil, rightAnchor: nil, bottomAnchor: nil, leftAnchor: nil)
+        logoImageView.centerView()
         
         view.backgroundColor = UIColor(red: 0, green: 120, blue: 175)
         return view
@@ -98,14 +98,14 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(logoContainerView)
-        logoContainerView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: view.topAnchor, rightAnchor: view.rightAnchor, bottomAnchor: nil, leftAnchor: view.leftAnchor)
-        logoContainerView.setSize(widthAnchor: nil, heightAnchor: 200)
+        logoContainerView.fillSuperView()
+        logoContainerView.setSize(width: nil, height: 200)
         
         view.backgroundColor = .white
         
         view.addSubview(dontHaveAccountButton)
-        dontHaveAccountButton.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: nil, rightAnchor: view.safeRightAnchor, bottomAnchor: view.safeBottomAnchor, leftAnchor: view.safeLeftAnchor)
-        dontHaveAccountButton.setSize(widthAnchor: nil, heightAnchor: 50)
+        dontHaveAccountButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        dontHaveAccountButton.setSize(width: nil, height: 50)
         
         placeInputFields()
     }
@@ -131,12 +131,12 @@ class LoginController: UIViewController {
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
         stackView.spacing = 10
-        let stackViewHeight = CGFloat(stackView.arrangedSubviews.count * Int(stackView.spacing + 40))
+        let stackViewHeight = stackView.arrangedSubviews.count * Int(stackView.spacing + 40)
         
         view.addSubview(stackView)
         
-        stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: logoContainerView.safeBottomAnchor, rightAnchor: view.safeRightAnchor, bottomAnchor: nil, leftAnchor: view.safeLeftAnchor, topPadding: 40, rightPadding: 40, leftPadding: 40)
-        stackView.setSize(widthAnchor: nil, heightAnchor: stackViewHeight)
+        stackView.anchor(top: logoContainerView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 40, left: 40, bottom: 0, right: 40))
+        stackView.setSize(width: nil, height: stackViewHeight)
         
     }
 }

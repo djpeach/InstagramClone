@@ -102,18 +102,18 @@ class UserProfileHeader: UICollectionViewCell {
         super.init(frame: frame)
         
         self.addSubview(profileImageView)
-        profileImageView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: self.topAnchor, rightAnchor: nil, bottomAnchor: nil, leftAnchor: self.leftAnchor, topPadding: 12, rightPadding: 0, bottomPadding: 0, leftPadding: 12)
-        profileImageView.setSize(widthAnchor: 80, heightAnchor: 80)
+        profileImageView.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 12, left: 12, bottom: 0, right: 0))
+        profileImageView.setSize(width: 80, height: 80)
         profileImageView.layer.cornerRadius = 80 / 2
         profileImageView.clipsToBounds = true
         
         setupBottomToolbar()
         self.addSubview(userNameLabel)
-        userNameLabel.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: profileImageView.bottomAnchor, rightAnchor: self.safeRightAnchor, bottomAnchor: gridButton.topAnchor, leftAnchor: self.safeLeftAnchor, rightPadding: 12, leftPadding: 12)
+        userNameLabel.anchor(top: profileImageView.bottomAnchor, leading: self.leadingAnchor, bottom: gridButton.topAnchor, trailing: self.trailingAnchor, padding: .init(top: 0, left: 12, bottom: 0, right: 12))
         setupUserStatsView()
         self.addSubview(editProfileButton)
-        editProfileButton.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: postsLabel.bottomAnchor, rightAnchor: followingLabel.rightAnchor, bottomAnchor: nil, leftAnchor: postsLabel.leftAnchor, topPadding: 2)
-        editProfileButton.setSize(widthAnchor: nil, heightAnchor: 34)
+        editProfileButton.anchor(top: postsLabel.bottomAnchor, leading: postsLabel.leadingAnchor, bottom: nil, trailing: followersLabel.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 0))
+        editProfileButton.setSize(width: nil, height: 34)
     }
     
     fileprivate func setupUserStatsView() {
@@ -122,8 +122,8 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.distribution = .fillEqually
         
         self.addSubview(stackView)
-        stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: self.safeTopAnchor, rightAnchor: self.safeRightAnchor, bottomAnchor: nil, leftAnchor: profileImageView.rightAnchor, topPadding: 12, rightPadding: 12, leftPadding: 12)
-        stackView.setSize(widthAnchor: nil, heightAnchor: 50)
+        stackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, leading: profileImageView.rightAnchor, bottom: nil, trailing: self.safeAreaLayoutGuide.rightAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
+        stackView.setSize(width: nil, height: 50)
     }
     
     fileprivate func setupBottomToolbar() {
@@ -142,14 +142,12 @@ class UserProfileHeader: UICollectionViewCell {
         self.addSubview(topDividerView)
         self.addSubview(bottomDividerView)
         
-        stackView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: nil, rightAnchor: self.safeRightAnchor, bottomAnchor: self.safeBottomAnchor, leftAnchor: self.safeLeftAnchor)
-        stackView.setSize(widthAnchor: nil, heightAnchor: 50)
-        
-        topDividerView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: stackView.topAnchor, rightAnchor: self.safeRightAnchor, bottomAnchor: nil, leftAnchor: self.safeLeftAnchor)
-        topDividerView.setSize(widthAnchor: nil, heightAnchor: 0.5)
-        
-        bottomDividerView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: stackView.bottomAnchor, rightAnchor: self.safeRightAnchor, bottomAnchor: nil, leftAnchor: self.safeLeftAnchor)
-        bottomDividerView.setSize(widthAnchor: nil, heightAnchor: 0.5)
+        stackView.anchor(top: nil, leading: self.safeAreaLayoutGuide.leadingAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, trailing: self.safeAreaLayoutGuide.trailingAnchor)
+        stackView.setSize(width: nil, height: 50)
+        topDividerView.anchor(top: stackView.topAnchor, leading: self.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: self.safeAreaLayoutGuide.trailingAnchor)
+        topDividerView.setSize(width: nil, height: 0.5)
+        bottomDividerView.anchor(top: stackView.bottomAnchor, leading: self.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: self.safeAreaLayoutGuide.trailingAnchor)
+        bottomDividerView.setSize(width: nil, height: 0.5)
     }
     
     required init?(coder aDecoder: NSCoder) {
