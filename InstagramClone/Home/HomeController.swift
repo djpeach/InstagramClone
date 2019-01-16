@@ -45,7 +45,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         var height: CGFloat = 40 // profile image height
         height += 8 + 8 // top and bottom padding for profile image
         height += width // width of photo = height of photo == square photo :)
-        height += 50
+        height += 50 // height of action bar
+        height += 120 // height of caption
         
         return CGSize(width: view.frame.width, height: height)
     }
