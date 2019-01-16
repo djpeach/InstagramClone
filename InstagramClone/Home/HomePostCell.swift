@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomePostCell: UICollectionViewCell {
     
@@ -15,6 +16,13 @@ class HomePostCell: UICollectionViewCell {
             photoImageView.image = nil
             guard let imageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: imageUrl)
+            usernameLabel.text = post?.user.username
+            let attributedText = NSMutableAttributedString(string: "\(post?.user.username ?? "")  ", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+            attributedText.append(NSAttributedString(string: post?.caption ?? "", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)]))
+            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+            attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+            captionLabel.attributedText = attributedText
+            
         }
     }
     

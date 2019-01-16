@@ -57,8 +57,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         databaseRef.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String : Any] else { return }
-                
-            let post = Post(dictionary: dictionary)
+            
+            let dummyUser = User(dictionary: ["username": "djpeach"])
+            let post = Post(user: dummyUser, dictionary: dictionary)
             self.posts.append(post)
             
             self.collectionView.reloadData()
