@@ -43,16 +43,16 @@ class SharePhotoController: UIViewController {
         let containerView = UIView()
         containerView.backgroundColor = .white
         
-        view.addSubview(containerView)
-        containerView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: view.safeAreaLayoutGuide.topAnchor, rightAnchor: view.rightAnchor, bottomAnchor: nil, leftAnchor: view.leftAnchor)
-        containerView.setSize(widthAnchor: nil, heightAnchor: 100)
+        view.addSubViews(views: [containerView])
+        containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
+        containerView.setSize(width: nil, height: 100)
         
-        containerView.addSubview(thumbnail)
-        thumbnail.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: containerView.topAnchor, rightAnchor: nil, bottomAnchor: containerView.bottomAnchor, leftAnchor: containerView.leftAnchor, topPadding: 8, bottomPadding: 8, leftPadding: 8)
-        thumbnail.setSize(widthAnchor: 84, heightAnchor: nil)
+        containerView.addSubViews(views: [thumbnail, textView])
         
-        containerView.addSubview(textView)
-        textView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: containerView.topAnchor, rightAnchor: containerView.rightAnchor, bottomAnchor: containerView.bottomAnchor, leftAnchor: thumbnail.rightAnchor, topPadding: 8, rightPadding: 8, bottomPadding: 8, leftPadding: 8)
+        thumbnail.anchor(top: containerView.topAnchor, leading: containerView.leadingAnchor, bottom: containerView.bottomAnchor, trailing: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 0))
+        thumbnail.setSize(width: 84, height: nil)
+        
+        textView.anchor(top: containerView.topAnchor, leading: thumbnail.rightAnchor, bottom: containerView.bottomAnchor, trailing: containerView.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8))
     }
     
     @objc func handleShare() {

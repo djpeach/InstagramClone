@@ -16,7 +16,7 @@ class HomeController: UICollectionViewController {
         
         collectionView.backgroundColor = .orange
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

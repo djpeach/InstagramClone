@@ -17,8 +17,8 @@ class HomePostCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(photoImageView)
-        photoImageView.anchor(centerXAnchor: nil, centerYAnchor: nil, topAnchor: topAnchor, rightAnchor: rightAnchor, bottomAnchor: bottomAnchor, leftAnchor: leftAnchor)
+        self.addSubViews(views: [photoImageView])
+        photoImageView.fillSuperView()
     }
     
     required init?(coder aDecoder: NSCoder) {
