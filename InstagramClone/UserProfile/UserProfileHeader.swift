@@ -122,7 +122,7 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.distribution = .fillEqually
         
         self.addSubview(stackView)
-        stackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, leading: profileImageView.rightAnchor, bottom: nil, trailing: self.safeAreaLayoutGuide.rightAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
+        stackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, leading: profileImageView.leadingAnchor, bottom: nil, trailing: self.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
         stackView.setSize(width: nil, height: 50)
     }
     
