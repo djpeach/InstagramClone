@@ -112,7 +112,7 @@ class UserProfileHeader: UICollectionViewCell {
         userNameLabel.anchor(top: profileImageView.bottomAnchor, leading: self.leadingAnchor, bottom: gridButton.topAnchor, trailing: self.trailingAnchor, padding: .init(top: 0, left: 12, bottom: 0, right: 12))
         setupUserStatsView()
         self.addSubview(editProfileButton)
-        editProfileButton.anchor(top: postsLabel.bottomAnchor, leading: postsLabel.leadingAnchor, bottom: nil, trailing: followersLabel.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 0))
+        editProfileButton.anchor(top: postsLabel.bottomAnchor, leading: postsLabel.leadingAnchor, bottom: nil, trailing: followingLabel.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 0))
         editProfileButton.setSize(width: nil, height: 34)
     }
     
@@ -122,7 +122,7 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.distribution = .fillEqually
         
         self.addSubview(stackView)
-        stackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, leading: profileImageView.leadingAnchor, bottom: nil, trailing: self.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
+        stackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, leading: profileImageView.trailingAnchor, bottom: nil, trailing: self.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
         stackView.setSize(width: nil, height: 50)
     }
     

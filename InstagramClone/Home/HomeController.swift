@@ -53,17 +53,25 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let databaseRef = Database.database().reference().child("posts").child(uid)
         
-        databaseRef.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
-            guard let dictionary = snapshot.value as? [String : Any] else { return }
-                
-            let post = Post(dictionary: dictionary)
-            self.posts.append(post)
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let userDictionary = snapshot.value as? [String : Any] else { return }
+            let user = User(dictionary: userDictionary)
             
-            self.collectionView.reloadData()
+            let databaseRef = Database.database().reference().child("posts").child(uid)
+            databaseRef.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? [String : Any] else { return }
+                
+                let post = Post(user: user, dictionary: dictionary)
+                self.posts.insert(post, at: 0)
+                
+                self.collectionView.reloadData()
+            }) { (err) in
+                print("Failed to fetch posts with error: \(err)")
+            }
+
         }) { (err) in
-            print("Failed to fetch posts with error: \(err)")
+            print("Failed to fetch user for post with error: \(err)")
         }
     }
 }
