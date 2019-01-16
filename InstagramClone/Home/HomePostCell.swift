@@ -17,13 +17,21 @@ class HomePostCell: UICollectionViewCell {
             guard let imageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: imageUrl)
             usernameLabel.text = post?.user.username
-            let attributedText = NSMutableAttributedString(string: "\(post?.user.username ?? "")  ", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-            attributedText.append(NSAttributedString(string: post?.caption ?? "", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)]))
-            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
-            attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.gray]))
-            captionLabel.attributedText = attributedText
+            guard let profileImageUrl = post?.user.profileImageUrl else { return }
+            userProfileImageView.loadImage(urlString: profileImageUrl)
+            setupAttributedCaption()
             
         }
+    }
+    
+    func setupAttributedCaption() {
+        guard let post = self.post else { return }
+        let attributedText = NSMutableAttributedString(string: "\(post.user.username)  ", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributedText.append(NSAttributedString(string: post.caption, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)]))
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        
+        self.captionLabel.attributedText = attributedText
     }
     
     let photoImageView: CustomImageView = {
@@ -38,7 +46,6 @@ class HomePostCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.layer.cornerRadius = 20
-        iv.backgroundColor = .blue
         return iv
     }()
     
