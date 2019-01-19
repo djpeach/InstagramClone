@@ -54,15 +54,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let userDictionary = snapshot.value as? [String : Any] else { return }
-            let user = User(uid: uid, dictionary: userDictionary)
-            
+        Database.fetchUserWithUID(uid: uid) { (user) in
             self.fetchPostsWithUser(user: user)
-
-        }) { (err) in
-            print("Failed to fetch user for post with error: \(err)")
         }
+    
     }
     
     fileprivate func fetchPostsWithUser(user: User) {
