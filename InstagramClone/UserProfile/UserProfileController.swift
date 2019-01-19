@@ -146,7 +146,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             
-            self.user = User(dictionary: dictionary)
+            self.user = User(uid: uid, dictionary: dictionary)
             self.navigationItem.title = self.user?.username
             
             // Call the collectionViewDelegate methods again
