@@ -23,6 +23,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
+        collectionView.alwaysBounceVertical = true
         
         navigationController?.navigationBar.addSubview(searchBar)
         searchBar.fillSuperView(padding: .init(top: 0, left: 8, bottom: 8, right: 8))

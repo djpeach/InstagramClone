@@ -43,6 +43,7 @@ class UserSearchCell: UICollectionViewCell {
         profileImageView.setSize(width: 50, height: 50)
         usernameLabel.anchor(top: topAnchor, leading: profileImageView.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 8, bottom: 0, right: 0))
         sepView.anchor(top: nil, leading: usernameLabel.leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 8, bottom: 0, right: 0))
+        sepView.setSize(width: nil, height: 1 )
     }
     
     required init?(coder aDecoder: NSCoder) {
