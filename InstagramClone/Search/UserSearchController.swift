@@ -53,9 +53,14 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.filteredUsers = self.allUsers.filter { (user) -> Bool in
-            return user.username.contains(searchText)
+        if (searchText.count > 0) {
+            self.filteredUsers = self.allUsers.filter { (user) -> Bool in
+                return user.username.contains(searchText)
+            }
+        } else {
+            self.filteredUsers = self.allUsers
         }
+        collectionView.reloadData()
     }
     
     fileprivate func fetchUsers() {
@@ -70,9 +75,10 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
                 let user = User(uid: key, dictionary: userDict)
                 self.allUsers.append(user)
                 
-                self.collectionView.reloadData()
-                
             })
+            
+            self.filteredUsers = self.allUsers
+            self.collectionView.reloadData()
         }) { (err) in
             print("Failed to fetch users for search with error: \(err)")
         }
