@@ -53,9 +53,9 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if (searchText.count > 0) {
+        if (!searchText.isEmpty) {
             self.filteredUsers = self.allUsers.filter { (user) -> Bool in
-                return user.username.contains(searchText)
+                return user.username.lowercased().contains(searchText.lowercased())
             }
         } else {
             self.filteredUsers = self.allUsers
