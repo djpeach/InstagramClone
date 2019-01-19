@@ -74,7 +74,10 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
                 
                 let user = User(uid: key, dictionary: userDict)
                 self.allUsers.append(user)
-                
+            })
+            
+            self.allUsers.sort(by: { (u1, u2) -> Bool in
+                return u1.username.compare(u2.username) == .orderedAscending
             })
             
             self.filteredUsers = self.allUsers
