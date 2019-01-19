@@ -98,7 +98,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(logoContainerView)
-        logoContainerView.fillSuperView()
+        logoContainerView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
         logoContainerView.setSize(width: nil, height: 200)
         
         view.backgroundColor = .white
@@ -135,7 +135,7 @@ class LoginController: UIViewController {
         
         view.addSubview(stackView)
         
-        stackView.anchor(top: logoContainerView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 40, left: 40, bottom: 0, right: 40))
+        stackView.anchor(top: logoContainerView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 40, left: 40, bottom: 0, right: 40))
         stackView.setSize(width: nil, height: stackViewHeight)
         
     }

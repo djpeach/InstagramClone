@@ -143,20 +143,14 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     // Fetch and set user to user var
     fileprivate func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
-            
-            self.user = User(dictionary: dictionary)
+        
+        Database.fetchUserWithUID(uid: uid) { (user) in
+            self.user = user
             self.navigationItem.title = self.user?.username
             
             // Call the collectionViewDelegate methods again
             // (this will set the header user, and update the photo)
             self.collectionView.reloadData()
-            
-            self.fetchOrderedPosts()
-            
-        }) { (err) in
-            print("Failed to fetch user: \(err)")
         }
     }
     
