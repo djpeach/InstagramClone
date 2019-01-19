@@ -181,7 +181,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     fileprivate func placeAddPhotoButton() {
         view.addSubview(plusPhotoButton)
         
-        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
+        plusPhotoButton.centerViewX()
+        plusPhotoButton.anchor(top: view.safeTopAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
         plusPhotoButton.setSize(width: 140, height: 140)
     }
     
@@ -194,8 +195,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         let stackViewHeight = stackView.arrangedSubviews.count * Int(stackView.spacing + 40)
         
         view.addSubview(stackView)
-        stackView.anchor(top: plusPhotoButton.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 20, bottom: 0, right: 20))
-        stackView.anchor(top: plusPhotoButton.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        stackView.anchor(top: plusPhotoButton.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 40, bottom: 0, right: 40))
         stackView.setSize(width: nil, height: stackViewHeight)
         
     }

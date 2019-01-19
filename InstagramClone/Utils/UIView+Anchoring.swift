@@ -17,16 +17,16 @@ extension UIView {
         self.disableAutoresizingMask()
         
         if let top = top {
-            self.topAnchor.constraint(equalTo: top, constant: padding.top).setActive()
+            self.topAnchor.constraint(equalTo: top, constant: padding.top).activate()
         }
         if let leading = leading {
-            self.leadingAnchor.constraint(equalTo: leading, constant: padding.left).setActive()
+            self.leadingAnchor.constraint(equalTo: leading, constant: padding.left).activate()
         }
         if let bottom = bottom {
-            self.bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).setActive()
+            self.bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).activate()
         }
         if let trailing = trailing {
-            self.trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).setActive()
+            self.trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).activate()
         }
     }
     
@@ -34,10 +34,10 @@ extension UIView {
         self.disableAutoresizingMask()
         
         if let centerYAnchor = superview?.centerYAnchor {
-            self.centerYAnchor.constraint(equalTo: centerYAnchor).setActive()
+            self.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
         }
         if let centerXAnchor = superview?.centerXAnchor {
-            self.centerXAnchor.constraint(equalTo: centerXAnchor).setActive()
+            self.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
         }
     }
     
@@ -45,7 +45,7 @@ extension UIView {
         self.disableAutoresizingMask()
         
         if let centerYAnchor = superview?.centerYAnchor {
-            self.centerYAnchor.constraint(equalTo: centerYAnchor).setActive()
+            self.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
         }
     }
     
@@ -53,7 +53,7 @@ extension UIView {
         self.disableAutoresizingMask()
         
         if let centerXAnchor = superview?.centerXAnchor {
-            self.centerXAnchor.constraint(equalTo: centerXAnchor).setActive()
+            self.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
         }
     }
     
@@ -61,10 +61,10 @@ extension UIView {
         self.disableAutoresizingMask()
         
         if let width = width {
-            self.widthAnchor.constraint(equalToConstant: CGFloat(width)).setActive()
+            self.widthAnchor.constraint(equalToConstant: CGFloat(width)).activate()
         }
         if let height = height {
-            self.heightAnchor.constraint(equalToConstant: CGFloat(height)).setActive()
+            self.heightAnchor.constraint(equalToConstant: CGFloat(height)).activate()
         }
     }
     
@@ -72,21 +72,21 @@ extension UIView {
         self.disableAutoresizingMask()
         
         if let width = width {
-            self.widthAnchor.constraint(equalToConstant: width).setActive()
+            self.widthAnchor.constraint(equalToConstant: width).activate()
         }
         if let height = height {
-            self.heightAnchor.constraint(equalToConstant: height).setActive()
+            self.heightAnchor.constraint(equalToConstant: height).activate()
         }
     }
     
-    func setSize(widthAnchor: NSLayoutDimension?, heightAnchor: NSLayoutDimension?) {
+    func setSize(widthDimension: NSLayoutDimension?, widthMultiplier: CGFloat = 1, heightDimension: NSLayoutDimension?, heightMultiplier: CGFloat = 1) {
         self.disableAutoresizingMask()
         
-        if let widthAnchor = widthAnchor {
-            self.widthAnchor.constraint(equalTo: widthAnchor).setActive()
+        if let widthDimension = widthDimension {
+            self.widthAnchor.constraint(equalTo: widthDimension, multiplier: widthMultiplier).activate()
         }
-        if let heightAnchor = heightAnchor {
-            self.heightAnchor.constraint(equalTo: heightAnchor).setActive()
+        if let heightDimension = heightDimension {
+            self.heightAnchor.constraint(equalTo: heightDimension, multiplier: heightMultiplier).activate()
         }
     }
     
@@ -101,10 +101,38 @@ extension UIView {
             self.translatesAutoresizingMaskIntoConstraints = false
         }
     }
+    
+    var safeTopAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.topAnchor
+        }
+        return topAnchor
+    }
+    
+    var safeLeadingAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.leadingAnchor
+        }
+        return leadingAnchor
+    }
+    
+    var safeBottomAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.bottomAnchor
+        }
+        return bottomAnchor
+    }
+    
+    var safeTrailingAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.trailingAnchor
+        }
+        return trailingAnchor
+    }
 }
 
 extension NSLayoutConstraint {
-    func setActive() {
+    func activate() {
         self.isActive = true
     }
 }
