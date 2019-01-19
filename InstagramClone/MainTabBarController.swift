@@ -23,7 +23,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
                 case .authorized:
                     DispatchQueue.main.async {
                         self.present(navController, animated: true, completion: nil)
-                    }
+                    } 
                 default:
                     break
                 }
