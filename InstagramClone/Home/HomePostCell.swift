@@ -86,7 +86,7 @@ class HomePostCell: UICollectionViewCell {
     
     @objc fileprivate func handleComment() {
         guard let post = self.post else { return }
-        delegate?.didTapComment(post)
+        delegate?.didTapComment(post: post)
     }
     
     let sendMessageButton: UIButton = {
