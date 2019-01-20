@@ -18,7 +18,65 @@ class UserProfileHeader: UICollectionViewCell {
             profileImageView.loadImage(urlString: profileImageUrl)
             
             userNameLabel.text = self.user?.username
+            setupProfileHeaderButton()
         }
+    }
+    
+    fileprivate func setupProfileHeaderButton() {
+        guard let currentUserUID = Auth.auth().currentUser?.uid else { return }
+        guard let userUID = self.user?.uid else { return }
+        
+        if (currentUserUID != userUID) {
+            
+            Database.database().reference().child("following").child(currentUserUID).child(userUID).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let isFollowing = snapshot.value as? Int, isFollowing == 1 {
+                    self.profileHeaderButton.setTitle("Unfollow", for: .normal)
+                } else {
+                    self.setupFollowStyles()
+                }
+            }) { (err) in
+                print("Error in getting the user's following list")
+            }
+            
+            
+        }
+    }
+    
+    @objc fileprivate func profileHeaderButtonWasClicked() {
+        
+        guard let currentUserUID = Auth.auth().currentUser?.uid else { return }
+        guard let userID = user?.uid else { return }
+        let ref = Database.database().reference().child("following").child(currentUserUID)
+        
+        if profileHeaderButton.titleLabel?.text == "Unfollow" {
+            ref.removeValue { (err, ref) in
+                if let err = err {
+                    print("Error removing value: \(err)")
+                    return
+                }
+                self.setupFollowStyles()
+            }
+        } else {
+            let values = [userID: 1]
+            ref.updateChildValues(values) { (err, ref) in
+                if let err = err {
+                    print("Error updating follow value: \(err)")
+                    return
+                }
+                
+                self.profileHeaderButton.setTitle("Unfollow", for: .normal)
+                self.profileHeaderButton.backgroundColor = .white
+                self.profileHeaderButton.setTitleColor(.black, for: .normal)
+                self.profileHeaderButton.layer.borderColor = UIColor.lightGray.cgColor
+            }
+        }
+    }
+    
+    fileprivate func setupFollowStyles() {
+        self.profileHeaderButton.setTitle("Follow", for: .normal)
+        self.profileHeaderButton.backgroundColor = UIColor.init(red: 17, green: 154, blue: 237)
+        self.profileHeaderButton.setTitleColor(.white, for: .normal)
+        self.profileHeaderButton.layer.borderColor = UIColor.init(red: 17, green: 154, blue: 237).cgColor
     }
     
     // MARK: Create view for profile image
@@ -87,7 +145,7 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
     
-    let editProfileButton: UIButton = {
+    lazy var profileHeaderButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Edit Profile", for: .normal)
         btn.setTitleColor(.black, for: .normal)
@@ -95,6 +153,7 @@ class UserProfileHeader: UICollectionViewCell {
         btn.layer.borderColor = UIColor.lightGray.cgColor
         btn.layer.borderWidth = 1
         btn.layer.cornerRadius = 3
+        btn.addTarget(self, action: #selector(profileHeaderButtonWasClicked), for: .touchUpInside)
         return btn
     }()
     
@@ -111,9 +170,9 @@ class UserProfileHeader: UICollectionViewCell {
         self.addSubview(userNameLabel)
         userNameLabel.anchor(top: profileImageView.bottomAnchor, leading: self.leadingAnchor, bottom: gridButton.topAnchor, trailing: self.trailingAnchor, padding: .init(top: 0, left: 12, bottom: 0, right: 12))
         setupUserStatsView()
-        self.addSubview(editProfileButton)
-        editProfileButton.anchor(top: postsLabel.bottomAnchor, leading: postsLabel.leadingAnchor, bottom: nil, trailing: followingLabel.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 0))
-        editProfileButton.setSize(width: nil, height: 34)
+        self.addSubview(profileHeaderButton)
+        profileHeaderButton.anchor(top: postsLabel.bottomAnchor, leading: postsLabel.leadingAnchor, bottom: nil, trailing: followingLabel.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 0))
+        profileHeaderButton.setSize(width: nil, height: 34)
     }
     
     fileprivate func setupUserStatsView() {
