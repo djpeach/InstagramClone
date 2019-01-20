@@ -67,7 +67,6 @@ class PreviewPhotoContainerView: UIView {
                         saveLabel.removeFromSuperview()
                     })
                 })
-                self.removeFromSuperview()
             }
         }
     }
