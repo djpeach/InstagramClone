@@ -27,6 +27,8 @@
 		65AF0D7221F4F60100103304 /* CustomAnimationPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF0D7121F4F60100103304 /* CustomAnimationPresentor.swift */; };
 		65AF0D7421F4FCAE00103304 /* CustomAnimationDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF0D7321F4FCAE00103304 /* CustomAnimationDismisser.swift */; };
 		65AF0D7621F5021800103304 /* CommentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF0D7521F5021800103304 /* CommentsController.swift */; };
+		65AF0D7A21F5109E00103304 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF0D7921F5109E00103304 /* CommentCell.swift */; };
+		65AF0D7C21F518B000103304 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF0D7B21F518B000103304 /* Comment.swift */; };
 		65BC662F21EEA80300B0E199 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC662E21EEA80300B0E199 /* HomeController.swift */; };
 		65BC663121EEA8D300B0E199 /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC663021EEA8D300B0E199 /* HomePostCell.swift */; };
 		65BC667121EED90300B0E199 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC667021EED90300B0E199 /* User.swift */; };
@@ -66,6 +68,8 @@
 		65AF0D7121F4F60100103304 /* CustomAnimationPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationPresentor.swift; sourceTree = "<group>"; };
 		65AF0D7321F4FCAE00103304 /* CustomAnimationDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationDismisser.swift; sourceTree = "<group>"; };
 		65AF0D7521F5021800103304 /* CommentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsController.swift; sourceTree = "<group>"; };
+		65AF0D7921F5109E00103304 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		65AF0D7B21F518B000103304 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		65BC662E21EEA80300B0E199 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		65BC663021EEA8D300B0E199 /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		65BC667021EED90300B0E199 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 				65BC662E21EEA80300B0E199 /* HomeController.swift */,
 				65BC663021EEA8D300B0E199 /* HomePostCell.swift */,
 				65AF0D7521F5021800103304 /* CommentsController.swift */,
+				65AF0D7921F5109E00103304 /* CommentCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 			children = (
 				65D8901421ED8C5C00CDC6A3 /* Posts.swift */,
 				65BC667021EED90300B0E199 /* User.swift */,
+				65AF0D7B21F518B000103304 /* Comment.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 				6543DA1F21F3D554008988D8 /* UserSearchController.swift in Sources */,
 				6543DA2121F3E1B5008988D8 /* UserSearchCell.swift in Sources */,
 				65D8901921ED91AA00CDC6A3 /* CustomImageView.swift in Sources */,
+				65AF0D7A21F5109E00103304 /* CommentCell.swift in Sources */,
 				6543DA2321F41DAB008988D8 /* Date+TimeElapse.swift in Sources */,
 				65D8901721ED8D7100CDC6A3 /* UserProfilePhotoCell.swift in Sources */,
 				65AF0D7221F4F60100103304 /* CustomAnimationPresentor.swift in Sources */,
@@ -380,6 +387,7 @@
 				652BFDAE21E2B54F00F4E58A /* UserProfileController.swift in Sources */,
 				65D8901221ED8A1900CDC6A3 /* SharePhotoController.swift in Sources */,
 				65DA67CD21E6E48C00338454 /* LoginController.swift in Sources */,
+				65AF0D7C21F518B000103304 /* Comment.swift in Sources */,
 				65D8901021ED861000CDC6A3 /* PhotoSelectionHeader.swift in Sources */,
 				65AF0D7421F4FCAE00103304 /* CustomAnimationDismisser.swift in Sources */,
 				651770B921E111520051F3E1 /* AppDelegate.swift in Sources */,
