@@ -14,6 +14,7 @@ fileprivate let cellId = "CELLID"
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     func didTapComment(post: Post) {
         let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        commentsController.post = post
         navigationController?.pushViewController(commentsController, animated: true)
     }
     
@@ -112,7 +113,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             guard let dicts = snapshot.value as? [String: Any] else { return }
             dicts.forEach({ (key, value) in
                 guard let dict = value as? [String: Any] else { return }
-                let post = Post(user: user, dictionary: dict)
+                var post = Post(user: user, dictionary: dict)
+                post.id = key
                 self.posts.append(post)
             })
             self.posts.sort(by: { (p1, p2) -> Bool in
