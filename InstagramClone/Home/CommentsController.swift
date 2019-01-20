@@ -11,6 +11,8 @@ import Firebase
 
 class CommentsController: UICollectionViewController {
     
+    let cellId = "CELLID"
+    
     var post: Post?
     
     override func viewDidLoad() {
@@ -18,6 +20,16 @@ class CommentsController: UICollectionViewController {
         
         collectionView.backgroundColor = .white
         tabBarController?.tabBar.isHidden = true
+        
+//        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
+//        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
+        
+//        collectionView.register(CommentsCell.self, forCellWithReuseIdentifier: cellId)
+        fetchComments()
+    }
+    
+    fileprivate func fetchComments() {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,8 +77,6 @@ class CommentsController: UICollectionViewController {
                 print("Error inserting comment: \(err)")
                 return
             }
-            
-            
         }
     }
     
@@ -79,4 +89,17 @@ class CommentsController: UICollectionViewController {
     override var canBecomeFirstResponder: Bool {
         return true
     }
+    
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 15
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CommentsCell
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: view.frame.width, height: 60)
+//    }
 }
