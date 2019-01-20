@@ -31,14 +31,8 @@ class UserProfileHeader: UICollectionViewCell {
             Database.database().reference().child("following").child(currentUserUID).child(userUID).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let isFollowing = snapshot.value as? Int, isFollowing == 1 {
                     self.profileHeaderButton.setTitle("Unfollow", for: .normal)
-                    self.profileHeaderButton.backgroundColor = .white
-                    self.profileHeaderButton.setTitleColor(.black, for: .normal)
-                    self.profileHeaderButton.layer.borderColor = UIColor.lightGray.cgColor
                 } else {
-                    self.profileHeaderButton.setTitle("Follow", for: .normal)
-                    self.profileHeaderButton.backgroundColor = UIColor.init(red: 17, green: 154, blue: 237)
-                    self.profileHeaderButton.setTitleColor(.white, for: .normal)
-                    self.profileHeaderButton.layer.borderColor = UIColor.init(red: 17, green: 154, blue: 237).cgColor
+                    self.setupFollowStyles()
                 }
             }) { (err) in
                 print("Error in getting the user's following list")
@@ -60,7 +54,7 @@ class UserProfileHeader: UICollectionViewCell {
                     print("Error removing value: \(err)")
                     return
                 }
-                self.setupProfileHeaderButton()
+                self.setupFollowStyles()
             }
         } else {
             let values = [userID: 1]
@@ -69,9 +63,20 @@ class UserProfileHeader: UICollectionViewCell {
                     print("Error updating follow value: \(err)")
                     return
                 }
-                self.setupProfileHeaderButton()
+                
+                self.profileHeaderButton.setTitle("Unfollow", for: .normal)
+                self.profileHeaderButton.backgroundColor = .white
+                self.profileHeaderButton.setTitleColor(.black, for: .normal)
+                self.profileHeaderButton.layer.borderColor = UIColor.lightGray.cgColor
             }
         }
+    }
+    
+    fileprivate func setupFollowStyles() {
+        self.profileHeaderButton.setTitle("Follow", for: .normal)
+        self.profileHeaderButton.backgroundColor = UIColor.init(red: 17, green: 154, blue: 237)
+        self.profileHeaderButton.setTitleColor(.white, for: .normal)
+        self.profileHeaderButton.layer.borderColor = UIColor.init(red: 17, green: 154, blue: 237).cgColor
     }
     
     // MARK: Create view for profile image
