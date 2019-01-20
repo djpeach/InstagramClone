@@ -9,7 +9,9 @@
 import UIKit
 import AVFoundation
 
-class CameraController: UIViewController {
+class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
+    
+    let output = AVCapturePhotoOutput()
     
     let photoCaptureButton: UIButton = {
         let button = UIButton(type: .system)
@@ -26,7 +28,8 @@ class CameraController: UIViewController {
     }()
     
     @objc fileprivate func handleCapturePhoto() {
-        
+        let settings = AVCapturePhotoSettings()
+        output.capturePhoto(with: settings, delegate: self)
     }
     
     @objc fileprivate func handleDismiss() {
@@ -61,7 +64,6 @@ class CameraController: UIViewController {
             print("Count not setup camera input: \(err)")
         }
         
-        let output = AVCapturePhotoOutput()
         if captureSession.canAddOutput(output) {
             captureSession.addOutput(output)
         }
@@ -71,5 +73,15 @@ class CameraController: UIViewController {
         view.layer.addSublayer(previewLayer)
 
         captureSession.startRunning()
+    }
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        let imageData = photo.fileDataRepresentation()
+        guard let data = imageData else { return }
+        let previewImage = UIImage(data: data)
+        
+        let previewImageView = UIImageView(image: previewImage)
+        view.addSubViews(views: [previewImageView])
+        previewImageView.fillSuperView()
     }
 }
