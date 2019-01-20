@@ -54,27 +54,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         }
     }
     
-//    fileprivate func fetchPosts() {
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        let databaseRef = Database.database().reference().child("posts").child(uid)
-//
-//        databaseRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//            guard let dictionaries = snapshot.value as? [String : Any] else { return }
-//
-//            dictionaries.forEach({ (key: String, value: Any) in
-//                //                print("Key \(key), Value: \(value)")
-//
-//                guard let dictionary = value as? [String : Any] else { return }
-//
-//                let post = Post(dictionary: dictionary)
-//                self.posts.append(post)
-//            })
-//
-//            self.collectionView.reloadData()
-//        }) { (err) in
-//        }
-//    }
-    
     fileprivate func setupLogOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
     }
@@ -129,9 +108,6 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
         header.user = self.user
         
-        // not correct (not how you build a header view, create a custom one and use it during suppView registration instead
-        // header.addSubView(UIImageView())
-        
         return header
     }
     
@@ -161,15 +137,3 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     }
     
 }
-
-// MARK: Define User object
-
-//struct User {
-//    let username: String
-//    let profileImageUrl: String
-//    
-//    init(dictionary: [String: Any]) {
-//        self.username = dictionary["username"] as? String ?? ""
-//        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-//    }
-//}

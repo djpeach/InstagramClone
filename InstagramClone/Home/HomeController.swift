@@ -24,6 +24,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setupNavigationItems()
         fetchPosts()
+        fetchFollowingUsersIds()
+    }
+    
+    fileprivate func fetchFollowingUsersIds() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.database().reference().child("following").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let userIdsDict = snapshot.value as? [String: Any] else { return }
+            userIdsDict.forEach({ (key: String, value: Any) in
+                Database.fetchUserWithUID(uid: key, completion: { (user) in
+                    self.fetchPostsWithUser(user: user)
+                })
+            })
+        })
+        
     }
     
     func setupNavigationItems() {
@@ -62,16 +77,20 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func fetchPostsWithUser(user: User) {
         
-        let databaseRef = Database.database().reference().child("posts").child(user.uid)
-        databaseRef.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
-            guard let dictionary = snapshot.value as? [String : Any] else { return }
-            
-            let post = Post(user: user, dictionary: dictionary)
-            self.posts.insert(post, at: 0)
-            
+        let ref = Database.database().reference().child("posts").child(user.uid)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dicts = snapshot.value as? [String: Any] else { return }
+            dicts.forEach({ (key, value) in
+                guard let dict = value as? [String: Any] else { return }
+                let post = Post(user: user, dictionary: dict)
+                self.posts.append(post)
+            })
+            self.posts.sort(by: { (p1, p2) -> Bool in
+                return p1.creationDate.compare(p2.creationDate) == .orderedDescending
+            })
             self.collectionView.reloadData()
         }) { (err) in
-            print("Failed to fetch posts with error: \(err)")
+            print("Error fetching posts")
         }
     }
 }
