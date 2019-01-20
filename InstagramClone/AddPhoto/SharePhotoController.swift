@@ -52,7 +52,7 @@ class SharePhotoController: UIViewController {
         thumbnail.anchor(top: containerView.topAnchor, leading: containerView.leadingAnchor, bottom: containerView.bottomAnchor, trailing: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 0))
         thumbnail.setSize(width: 84, height: nil)
         
-        textView.anchor(top: containerView.topAnchor, leading: thumbnail.rightAnchor, bottom: containerView.bottomAnchor, trailing: containerView.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8))
+        textView.anchor(top: containerView.topAnchor, leading: thumbnail.trailingAnchor, bottom: containerView.bottomAnchor, trailing: containerView.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8))
     }
     
     @objc func handleShare() {

@@ -25,10 +25,17 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         return sb
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .interactive
         
         fetchUsers()
         
@@ -38,13 +45,22 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        searchBar.isHidden = true
+        searchBar.resignFirstResponder()
+        let user = filteredUsers[indexPath.item]
+        let userProfileController = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileController.userId = user.uid
+        navigationController?.pushViewController(userProfileController, animated: true)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredUsers.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! UserSearchCell
-        cell.user = filteredUsers[indexPath.row]
+        cell.user = filteredUsers[indexPath.item]
         return cell
     }
     
@@ -72,8 +88,10 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
                 
                 guard let userDict = value as? [String: Any] else { return }
                 
-                let user = User(uid: key, dictionary: userDict)
-                self.allUsers.append(user)
+                if (key != Auth.auth().currentUser?.uid) {
+                    let user = User(uid: key, dictionary: userDict)
+                    self.allUsers.append(user)
+                }
             })
             
             self.allUsers.sort(by: { (u1, u2) -> Bool in

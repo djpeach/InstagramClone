@@ -11,6 +11,8 @@ import Firebase
 
 class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var userId: String?
+    
     fileprivate var posts = [Post]()
     
     let cellId = "cellId"
@@ -32,8 +34,9 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     }
     
     fileprivate func fetchOrderedPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let databaseRef = Database.database().reference().child("posts").child(uid)
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        let uidToUse = self.userId ?? currentUserUid
+        let databaseRef = Database.database().reference().child("posts").child(uidToUse)
         
         
         
@@ -142,15 +145,18 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     
     // Fetch and set user to user var
     fileprivate func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         
-        Database.fetchUserWithUID(uid: uid) { (user) in
+        let uidToUse = self.userId ?? currentUserId
+        
+        Database.fetchUserWithUID(uid: uidToUse) { (user) in
             self.user = user
             self.navigationItem.title = self.user?.username
             
             // Call the collectionViewDelegate methods again
             // (this will set the header user, and update the photo)
             self.collectionView.reloadData()
+            self.fetchOrderedPosts()
         }
     }
     
