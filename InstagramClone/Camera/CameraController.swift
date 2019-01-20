@@ -33,7 +33,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     @objc fileprivate func handleDismiss() {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -80,8 +80,9 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         guard let data = imageData else { return }
         let previewImage = UIImage(data: data)
         
-        let previewImageView = UIImageView(image: previewImage)
-        view.addSubViews(views: [previewImageView])
-        previewImageView.fillSuperView()
+        let containerView = PreviewPhotoContainerView()
+        containerView.previewImageView.image = previewImage
+        view.addSubview(containerView)
+        containerView.fillSuperView()
     }
 }
