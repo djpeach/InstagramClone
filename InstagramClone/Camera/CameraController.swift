@@ -50,7 +50,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return customAnimationPresentor
+        return customAnimationDismisser
 
     }
     
