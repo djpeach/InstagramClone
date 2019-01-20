@@ -48,26 +48,28 @@ class UserProfileHeader: UICollectionViewCell {
         guard let userID = user?.uid else { return }
         let ref = Database.database().reference().child("following").child(currentUserUID)
         
-        if profileHeaderButton.titleLabel?.text == "Unfollow" {
-            ref.removeValue { (err, ref) in
-                if let err = err {
-                    print("Error removing value: \(err)")
-                    return
+        if (currentUserUID != userID) {
+            if profileHeaderButton.titleLabel?.text == "Unfollow" {
+                ref.child(userID).removeValue { (err, ref) in
+                    if let err = err {
+                        print("Error removing value: \(err)")
+                        return
+                    }
+                    self.setupFollowStyles()
                 }
-                self.setupFollowStyles()
-            }
-        } else {
-            let values = [userID: 1]
-            ref.updateChildValues(values) { (err, ref) in
-                if let err = err {
-                    print("Error updating follow value: \(err)")
-                    return
+            } else {
+                let values = [userID: 1]
+                ref.updateChildValues(values) { (err, ref) in
+                    if let err = err {
+                        print("Error updating follow value: \(err)")
+                        return
+                    }
+                    
+                    self.profileHeaderButton.setTitle("Unfollow", for: .normal)
+                    self.profileHeaderButton.backgroundColor = .white
+                    self.profileHeaderButton.setTitleColor(.black, for: .normal)
+                    self.profileHeaderButton.layer.borderColor = UIColor.lightGray.cgColor
                 }
-                
-                self.profileHeaderButton.setTitle("Unfollow", for: .normal)
-                self.profileHeaderButton.backgroundColor = .white
-                self.profileHeaderButton.setTitleColor(.black, for: .normal)
-                self.profileHeaderButton.layer.borderColor = UIColor.lightGray.cgColor
             }
         }
     }

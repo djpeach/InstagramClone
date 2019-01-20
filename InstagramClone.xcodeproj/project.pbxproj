@@ -19,6 +19,7 @@
 		6543DA1C21F3C329008988D8 /* FireBase+Uitls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543DA1B21F3C329008988D8 /* FireBase+Uitls.swift */; };
 		6543DA1F21F3D554008988D8 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543DA1E21F3D554008988D8 /* UserSearchController.swift */; };
 		6543DA2121F3E1B5008988D8 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543DA2021F3E1B5008988D8 /* UserSearchCell.swift */; };
+		6543DA2321F41DAB008988D8 /* Date+TimeElapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543DA2221F41DAB008988D8 /* Date+TimeElapse.swift */; };
 		6571980221E8164400A9D601 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571980121E8164400A9D601 /* PhotoSelectorController.swift */; };
 		6571980421E82A2700A9D601 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571980321E82A2700A9D601 /* PhotoSelectorCell.swift */; };
 		65BC662F21EEA80300B0E199 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BC662E21EEA80300B0E199 /* HomeController.swift */; };
@@ -52,6 +53,7 @@
 		6543DA1B21F3C329008988D8 /* FireBase+Uitls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FireBase+Uitls.swift"; sourceTree = "<group>"; };
 		6543DA1E21F3D554008988D8 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
 		6543DA2021F3E1B5008988D8 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
+		6543DA2221F41DAB008988D8 /* Date+TimeElapse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeElapse.swift"; sourceTree = "<group>"; };
 		6571980121E8164400A9D601 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		6571980321E82A2700A9D601 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		65BC662E21EEA80300B0E199 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				652182A121E14C8E00F0BB70 /* UIColor+ThemeColors.swift */,
 				65D8901821ED91AA00CDC6A3 /* CustomImageView.swift */,
 				6543DA1B21F3C329008988D8 /* FireBase+Uitls.swift */,
+				6543DA2221F41DAB008988D8 /* Date+TimeElapse.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				6543DA1F21F3D554008988D8 /* UserSearchController.swift in Sources */,
 				6543DA2121F3E1B5008988D8 /* UserSearchCell.swift in Sources */,
 				65D8901921ED91AA00CDC6A3 /* CustomImageView.swift in Sources */,
+				6543DA2321F41DAB008988D8 /* Date+TimeElapse.swift in Sources */,
 				65D8901721ED8D7100CDC6A3 /* UserProfilePhotoCell.swift in Sources */,
 				6543DA1A21F3A3D1008988D8 /* UIView+Anchoring.swift in Sources */,
 				652BFDB121E2D7E300F4E58A /* UserProfileHeader.swift in Sources */,
