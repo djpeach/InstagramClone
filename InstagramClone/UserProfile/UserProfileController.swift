@@ -54,18 +54,21 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
 //        let value =
 //        let query = ref.queryOrderedByKey().queryStarting(atValue: value).queryLimited(toFirst: 6)
-        var query = ref.queryOrderedByKey()
+//        var query = ref.queryOrderedByKey()
+        
+        var query = ref.queryOrdered(byChild: "creationDate")
         
         if posts.count > 0 {
-            let startingKey = posts.last?.id
-            query = query.queryStarting(atValue: startingKey)
+            let startingKey = posts.last?.creationDate.timeIntervalSince1970
+            query = query.queryEnding(atValue: startingKey)
         }
-        query.queryLimited(toFirst: 6).observeSingleEvent(of: .value, with: { (snapshot) in
+        query.queryLimited(toLast: 6).observeSingleEvent(of: .value, with: { (snapshot) in
             guard var allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            allObjects.reverse()
             if allObjects.count < 6 {
                 self.isFinishedPaging = true
             }
-            if self.posts.count > 0 {
+            if self.posts.count > 0 && allObjects.count > 0{
                 allObjects.removeFirst()
             }
             guard let user = self.user else { return }
