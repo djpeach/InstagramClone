@@ -12,6 +12,7 @@ import Firebase
 
 protocol HomePostCellDelegate {
     func didTapComment(post: Post)
+    func didLike(for cell: HomePostCell)
 }
 
 class HomePostCell: UICollectionViewCell {
@@ -22,6 +23,7 @@ class HomePostCell: UICollectionViewCell {
         didSet {
             photoImageView.image = nil
             guard let imageUrl = post?.imageUrl else { return }
+            likeButton.setImage(post?.hasLiked == true ? #imageLiteral(resourceName: "like_selected").withRenderingMode(.alwaysOriginal) : #imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
             photoImageView.loadImage(urlString: imageUrl)
             usernameLabel.text = post?.user.username
             guard let profileImageUrl = post?.user.profileImageUrl else { return }
@@ -71,11 +73,16 @@ class HomePostCell: UICollectionViewCell {
         return button
     }()
     
-    let likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
         return button
     }()
+    
+    @objc fileprivate func handleLike() {
+        delegate?.didLike(for: self)
+    }
     
     lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
