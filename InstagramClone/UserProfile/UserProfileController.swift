@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 
 class UserProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
+    
+    var isFinishedPaging = false
     func didChangeToListView() {
         isGridView = false
         collectionView.reloadData()
@@ -44,6 +46,39 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
         
         setupLogOutButton()
 //        fetchPosts()
+    }
+    
+    fileprivate func paginatePosts() {
+        guard let uid = self.user?.uid else { return }
+        let ref = Database.database().reference().child("posts").child(uid)
+        
+//        let value =
+//        let query = ref.queryOrderedByKey().queryStarting(atValue: value).queryLimited(toFirst: 6)
+        var query = ref.queryOrderedByKey()
+        
+        if posts.count > 0 {
+            let startingKey = posts.last?.id
+            query = query.queryStarting(atValue: startingKey)
+        }
+        query.queryLimited(toFirst: 6).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard var allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            if allObjects.count < 6 {
+                self.isFinishedPaging = true
+            }
+            if self.posts.count > 0 {
+                allObjects.removeFirst()
+            }
+            guard let user = self.user else { return }
+            allObjects.forEach({ (snapshot) in
+                guard let dict = snapshot.value as? [String:Any] else { return }
+                var post = Post(user: user, dictionary: dict)
+                post.id = snapshot.key
+                self.posts.append(post)
+            })
+            self.collectionView.reloadData()
+        }) { (err) in
+            print("Error fetching user's posts: \(err)")
+        }
     }
     
     fileprivate func fetchOrderedPosts() {
@@ -97,6 +132,9 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == self.posts.count - 1 && !isFinishedPaging {
+            paginatePosts()
+        }
         if isGridView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! UserProfilePhotoCell
             cell.post = posts[indexPath.item]
@@ -161,7 +199,7 @@ class UserProfileViewController: UICollectionViewController, UICollectionViewDel
             // Call the collectionViewDelegate methods again
             // (this will set the header user, and update the photo)
             self.collectionView.reloadData()
-            self.fetchOrderedPosts()
+            self.paginatePosts()
         }
     }
     
