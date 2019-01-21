@@ -9,7 +9,14 @@
 import UIKit
 import Firebase
 
+protocol UserProfileHeaderDelegate {
+    func didChangeToListView()
+    func didChangeToGridView()
+}
+
 class UserProfileHeader: UICollectionViewCell {
+    
+    var delegate: UserProfileHeaderDelegate?
     
     // Create dynamic optional user var
     var user: User? {
@@ -89,19 +96,37 @@ class UserProfileHeader: UICollectionViewCell {
         return iv
     }()
     
-    let gridButton: UIButton = {
+    lazy var gridButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(#imageLiteral(resourceName: "grid"), for: .normal)
 //        btn.tintColor = UIColor(white: 0, alpha: 0.2)
+        btn.addTarget(self, action: #selector(handleChangeToGridView), for: .touchUpInside)
         return btn
     }()
     
-    let listButton: UIButton = {
+    lazy var listButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(#imageLiteral(resourceName: "list"), for: .normal)
         btn.tintColor = UIColor(white: 0, alpha: 0.2)
+        btn.addTarget(self, action: #selector(handleChangeToListView), for: .touchUpInside)
         return btn
     }()
+    
+    @objc fileprivate func handleChangeToListView() {
+        listButton.tintColor = UIColor.init(red: 17, green: 154, blue: 237)
+        gridButton.tintColor = UIColor.init(white: 0, alpha: 0.2)
+//        listButton.isEnabled = false
+//        gridButton.isEnabled = true
+        delegate?.didChangeToListView()
+    }
+    
+    @objc fileprivate func handleChangeToGridView() {
+        gridButton.tintColor = UIColor.init(red: 17, green: 154, blue: 237)
+        listButton.tintColor = UIColor.init(white: 0, alpha: 0.2)
+//        gridButton.isEnabled = false
+//        listButton.isEnabled = true
+        delegate?.didChangeToGridView()
+    }
     
     let bookmarkButton: UIButton = {
         let btn = UIButton(type: .system)
