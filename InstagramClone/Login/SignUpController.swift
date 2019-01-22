@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 
 class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -112,7 +113,9 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                     print("Successfully uploaded profile image: \(profileImageURL)")
                     
                     /* Store User Info in db */
-                    let userInfo = ["username": username, "profileImageUrl": profileImageURL]
+                    
+                    guard let fcmToken = Messaging.messaging().fcmToken else { return }
+                    let userInfo = ["username": username, "profileImageUrl": profileImageURL, "fcmToken": fcmToken]
                     let valuesToStore = [user.uid: userInfo]
                     Database.database().reference().child("users").updateChildValues(valuesToStore, withCompletionBlock: { (err, ref) in
                         if let err = err {
