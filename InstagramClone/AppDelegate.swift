@@ -8,9 +8,11 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -24,7 +26,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Set the rootViewController to our custom MainTabBarController
         window?.rootViewController = MainTabBarController()
+        
+        attemptRegisterForNotifications(application: application)
         return true
+    }
+    
+    fileprivate func attemptRegisterForNotifications(application: UIApplication) {
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        
+        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, err) in
+            if let err = err {
+                print("Failed to request auth: \(err)")
+                return
+            }
+            
+            if granted {
+                print("Auth granted")
+            } else {
+                print("Auth denied")
+            }
+        }
+        
+        application.registerForRemoteNotifications()
+    
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Registered with FCM token: ", fcmToken)
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("Registered for notifications: \(deviceToken)")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
