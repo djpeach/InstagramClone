@@ -31,6 +31,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         return true
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let followerId = userInfo["followerId"] as? String {
+            print(followerId)
+            let userProfileController = UserProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+            userProfileController.userId = followerId
+            
+            if let mainTabBarController = window?.rootViewController as? MainTabBarController {
+                mainTabBarController.selectedIndex = 0
+                mainTabBarController.presentingViewController?.dismiss(animated: true, completion: nil)
+                if let homeNavigationController = mainTabBarController.viewControllers?.first as? UINavigationController {
+                    homeNavigationController.pushViewController(userProfileController, animated: true)
+                }
+            }
+        }
+    }
+    
     fileprivate func attemptRegisterForNotifications(application: UIApplication) {
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
