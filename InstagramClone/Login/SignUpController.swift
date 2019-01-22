@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import FirebaseMessaging
+import FirebaseMessaging 
 
 class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
