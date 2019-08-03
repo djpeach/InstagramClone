@@ -1,60 +1,99 @@
 //
-//  UIView+Anchoring.swift
-//  InstagramClone
+//  UIView+Ancoring.swift
+//  anchorextensions
 //
-//  Created by Daniel Peach on 1/5/19.
-//  Copyright © 2019 Daniel Peach. All rights reserved.
+//  Created by Daniel Peach on 1/15/19.
+//  Copyright © 2019 Peach Crate. All rights reserved.
 //
 
 import UIKit
 
 extension UIView {
-    
-    func anchor(centerXAnchor: NSLayoutXAxisAnchor?, centerYAnchor: NSLayoutYAxisAnchor?, topAnchor: NSLayoutYAxisAnchor?, rightAnchor: NSLayoutXAxisAnchor?, bottomAnchor: NSLayoutYAxisAnchor?, leftAnchor: NSLayoutXAxisAnchor?, topPadding: CGFloat = 0, rightPadding: CGFloat = 0, bottomPadding: CGFloat = 0, leftPadding: CGFloat = 0) {
-        
-        self.disableAutoresizingMask()
-        
-        if let centerX = centerXAnchor {
-            assert(leftAnchor == nil && rightAnchor == nil, "When using centerXAnchor, do not attempt to use left or right anchors")
-            assert(rightPadding == leftPadding, "When using centerXAnchor, set the left and right padding to the same value")
-            self.centerXAnchor.constraint(equalTo: centerX, constant: rightPadding).isActive = true
-        }
-        
-        if let centerY = centerYAnchor {
-            assert(topAnchor == nil && bottomAnchor == nil, "When using centerYAnchor, do not attempt to use top or bottom anchors")
-            assert(topPadding == bottomPadding, "When using centerYAnchor, set the top and bottom padding to the same value")
-            self.centerYAnchor.constraint(equalTo: centerY, constant: topPadding).isActive = true
-        }
-        
-        if let top = topAnchor {
-            self.topAnchor.constraint(equalTo: top, constant: topPadding).isActive = true
-        }
-        
-        if let right = rightAnchor {
-            self.rightAnchor.constraint(equalTo: right, constant: -rightPadding).isActive = true
-        }
-        
-        if let bottom = bottomAnchor {
-            self.bottomAnchor.constraint(equalTo: bottom, constant: bottomPadding).isActive = true
-        }
-        
-        if let left = leftAnchor {
-            self.leftAnchor.constraint(equalTo: left, constant: leftPadding).isActive = true
-        }
-        
+    func addSubViews(views: [UIView]) {
+        views.forEach( { self.addSubview($0) } )
     }
     
-    func setSize(widthAnchor: CGFloat?, heightAnchor: CGFloat?) {
-        
+    func anchor(top: NSLayoutYAxisAnchor?, leading: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero) {
         self.disableAutoresizingMask()
         
-        if let width = widthAnchor {
-            self.widthAnchor.constraint(equalToConstant: width).isActive = true
+        if let top = top {
+            self.topAnchor.constraint(equalTo: top, constant: padding.top).activate()
         }
+        if let leading = leading {
+            self.leadingAnchor.constraint(equalTo: leading, constant: padding.left).activate()
+        }
+        if let bottom = bottom {
+            self.bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).activate()
+        }
+        if let trailing = trailing {
+            self.trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).activate()
+        }
+    }
+    
+    func centerView() {
+        self.disableAutoresizingMask()
         
-        if let height = heightAnchor {
-            self.heightAnchor.constraint(equalToConstant: height).isActive = true
+        if let centerYAnchor = superview?.centerYAnchor {
+            self.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
         }
+        if let centerXAnchor = superview?.centerXAnchor {
+            self.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
+        }
+    }
+    
+    func centerViewY() {
+        self.disableAutoresizingMask()
+        
+        if let centerYAnchor = superview?.centerYAnchor {
+            self.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
+        }
+    }
+    
+    func centerViewX() {
+        self.disableAutoresizingMask()
+        
+        if let centerXAnchor = superview?.centerXAnchor {
+            self.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
+        }
+    }
+    
+    func setSize(width: Int?, height: Int?) {
+        self.disableAutoresizingMask()
+        
+        if let width = width {
+            self.widthAnchor.constraint(equalToConstant: CGFloat(width)).activate()
+        }
+        if let height = height {
+            self.heightAnchor.constraint(equalToConstant: CGFloat(height)).activate()
+        }
+    }
+    
+    func setSize(width: CGFloat?, height: CGFloat?) {
+        self.disableAutoresizingMask()
+        
+        if let width = width {
+            self.widthAnchor.constraint(equalToConstant: width).activate()
+        }
+        if let height = height {
+            self.heightAnchor.constraint(equalToConstant: height).activate()
+        }
+    }
+    
+    func setSize(widthDimension: NSLayoutDimension?, widthMultiplier: CGFloat = 1, heightDimension: NSLayoutDimension?, heightMultiplier: CGFloat = 1) {
+        self.disableAutoresizingMask()
+        
+        if let widthDimension = widthDimension {
+            self.widthAnchor.constraint(equalTo: widthDimension, multiplier: widthMultiplier).activate()
+        }
+        if let heightDimension = heightDimension {
+            self.heightAnchor.constraint(equalTo: heightDimension, multiplier: heightMultiplier).activate()
+        }
+    }
+    
+    func fillSuperView(padding: UIEdgeInsets = .zero) {
+        self.disableAutoresizingMask()
+        
+        anchor(top: superview?.topAnchor, leading: superview?.leadingAnchor, bottom: superview?.bottomAnchor, trailing: superview?.trailingAnchor, padding: padding)
     }
     
     func disableAutoresizingMask() {
@@ -70,11 +109,11 @@ extension UIView {
         return topAnchor
     }
     
-    var safeLeftAnchor: NSLayoutXAxisAnchor {
+    var safeLeadingAnchor: NSLayoutXAxisAnchor {
         if #available(iOS 11.0, *) {
-            return safeAreaLayoutGuide.leftAnchor
+            return safeAreaLayoutGuide.leadingAnchor
         }
-        return leftAnchor
+        return leadingAnchor
     }
     
     var safeBottomAnchor: NSLayoutYAxisAnchor {
@@ -84,10 +123,16 @@ extension UIView {
         return bottomAnchor
     }
     
-    var safeRightAnchor: NSLayoutXAxisAnchor {
+    var safeTrailingAnchor: NSLayoutXAxisAnchor {
         if #available(iOS 11.0, *) {
-            return safeAreaLayoutGuide.rightAnchor
+            return safeAreaLayoutGuide.trailingAnchor
         }
-        return rightAnchor
+        return trailingAnchor
+    }
+}
+
+extension NSLayoutConstraint {
+    func activate() {
+        self.isActive = true
     }
 }
